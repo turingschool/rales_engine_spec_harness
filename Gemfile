@@ -3,4 +3,5 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'minitest'
 gem 'pry'
-gem "faraday"
+gem 'faraday'
+gem 'capybara'
