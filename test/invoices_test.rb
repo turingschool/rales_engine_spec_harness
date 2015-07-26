@@ -5,7 +5,7 @@ class InvoicesApiTest < ApiTest
     invoices = {117 => [22, 84], 1337 => [262, 78], 4815 => [993, 77]}
     invoices.each do |id, (cust_id, merch_id)|
       data = load_data("/api/v1/invoices/#{id}")
-      assert_equal cust_id, data["customer_id"]
+      assert_equal cust_id,  data["customer_id"]
       assert_equal merch_id, data["merchant_id"]
     end
   end

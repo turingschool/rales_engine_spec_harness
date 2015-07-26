@@ -6,7 +6,7 @@ class CustomerApiTest < ApiTest
     customers.each do |id, (first_name, last_name)|
       data = load_data("/api/v1/customers/#{id}")
       assert_equal first_name, data["first_name"]
-      assert_equal last_name, data["last_name"]
+      assert_equal last_name,  data["last_name"]
     end
   end
 
