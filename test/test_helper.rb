@@ -1,11 +1,9 @@
 require "minitest"
 require "minitest/autorun"
-require "capybara"
 require "faraday"
 require "json"
 
 class ApiTest < Minitest::Test
-  include Capybara::DSL
   def base_url
     ENV["BASE_URL"] || "http://localhost:3000"
   end
