@@ -24,5 +24,11 @@ class ItemsApiTest < ApiTest
       assert_equal ["id", "name", "description", "unit_price", "merchant_id", "created_at", "updated_at"], item.keys
     end
   end
+
+  def test_loads_all_by_name
+      data = load_data("/api/v1/items/Item_Eos_Et")
+
+      assert_equal 3, data.size
+  end
 end
 
