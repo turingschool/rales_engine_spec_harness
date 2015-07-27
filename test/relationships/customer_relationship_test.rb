@@ -2,21 +2,28 @@ require "./test/test_helper"
 
 class CustomerApiRelationshipTest < ApiTest
   def test_loads_all_invoices_of_one_customer
-    customer_id = 20
+    customer_id = 309
 
-    data = load_data("/api/v1/customers/#{customer_id}/invoices")
-    assert_equal 10, data.count
-    assert_equal 99, data[0]["id"]
-    assert_equal 66, data[9]["merchant_id"]
+    invoices = load_data("/api/v1/customers/#{customer_id}/invoices")
+    assert_equal 6, invoices.count
+    assert_equal 1602, invoices.first["id"]
+    assert_equal 22, invoices.last["merchant_id"]
+
+    invoices.each do |invoice|
+      assert_equal customer_id, invoice["customer_id"]
+      assert_class_equal "invoice", invoice
+    end
   end
 
   def test_loads_all_transactions_of_one_customer
-    customer_id = 88
-    transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten.sort_by {|t| t["id"]}
+    customer_id = 29
 
-    assert_equal 10, transactions.count
-    assert_equal 427, transactions[2]["invoice_id"]
-    assert_equal "failed", transactions[6]["result"]
-    assert_equal "4870601195394267", transactions.last["credit_card_number"]
+    transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten
+    assert_equal 8, transactions.count
+    assert_equal 168, transactions.first["id"]
+    assert_equal "4410437213033941", transactions.last["credit_card_number"]
+    transactions.each do |transaction|
+      assert_class_equal "transaction", transaction
+    end
   end
 end
