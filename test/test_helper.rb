@@ -26,4 +26,15 @@ class ApiTest < Minitest::Test
   rescue JSON::ParserError
     flunk("Expected #{data} to be valid JSON.")
   end
+
+  def assert_class_equal(object, entity)
+    schema = {"transaction" => ["id", "invoice_id", "credit_card_number", "result", "created_at", "updated_at"],
+              "merchant" => ["id", "name", "created_at", "updated_at"],
+              "customer" => ["id", "first_name", "last_name", "created_at", "updated_at"],
+              "invoice" => ["id", "customer_id", "merchant_id", "status", "created_at", "updated_at"],
+              "invoice_item" => ["id", "item_id", "invoice_id", "quantity", "unit_price", "created_at", "updated_at"],
+              "item" => ["id", "name", "description", "unit_price", "merchant_id", "created_at", "updated_at"]
+    }
+    assert_equal schema[object], entity.keys
+  end
 end
