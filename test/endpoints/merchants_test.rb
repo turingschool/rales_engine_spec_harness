@@ -26,10 +26,16 @@ class MerchantsApiTest < ApiTest
 
     by_id = load_data("/api/v1/merchants/find?id=#{merchant['id']}")
     by_name = load_data("/api/v1/merchants/find?name=#{merchant['name']}")
+    by_created_at = load_data("/api/v1/merchants/find?created_at=#{merchant['created_at']}")
+    by_updated_at = load_data("/api/v1/merchants/find?updated_at=#{merchant['updated_at']}")
 
 
     assert_equal merchant, by_id
     assert_equal merchant, by_name
+    assert_equal 60, by_created_at['id']
+    assert_equal 60, by_updated_at['id']
+    assert_equal "Smitham LLC", by_created_at['name']
+    assert_equal "Smitham LLC", by_updated_at['name']
   end
 
   def test_it_can_find_all_instances_by_any_attribute
@@ -41,11 +47,21 @@ class MerchantsApiTest < ApiTest
 
     by_id = load_data("/api/v1/merchants/find_all?id=#{merchant['id']}")
     by_name = load_data("/api/v1/merchants/find_all?name=#{merchant['name']}")
+    by_created_at = load_data("/api/v1/merchants/find_all?created_at=#{merchant['created_at']}")
+    by_updated_at = load_data("/api/v1/merchants/find_all?updated_at=#{merchant['updated_at']}")
 
 
     assert_equal 1, by_id.count
     assert_equal 1, by_id.count
     assert_equal merchant, by_id.first
     assert_equal merchant, by_name.first
+
+    assert_equal 7, by_created_at.count
+    assert_equal 7, by_updated_at.count
+
+    by_created_at.one? do |merch|
+      merch["id"] == merchant["id"] &&
+        merch["name"] == merchant["name"]
+    end
   end
 end
