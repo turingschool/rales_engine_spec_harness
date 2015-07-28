@@ -2,6 +2,7 @@ require "minitest"
 require "minitest/autorun"
 require "faraday"
 require "json"
+require "pry"
 
 class ApiTest < Minitest::Test
   def base_url
@@ -34,12 +35,19 @@ class ApiTest < Minitest::Test
               "invoice_item" => ["id", "item_id", "invoice_id", "quantity", "unit_price", "created_at", "updated_at"],
               "item" => ["id", "name", "description", "unit_price", "merchant_id", "created_at", "updated_at"]
     }
-    assert_equal schema[object], entity.keys
+    assert_equal schema[object].sort, entity.keys.sort
+
   end
 
   def assert_one_in_list(entity, list)
     elem_in_list = list.one? {|ele| ele == entity}
 
     assert elem_in_list, "One and only one instance of entity should appear in list"
+  end
+
+  def assert_hash_equal(object, entity)
+    object.values.each do |v|
+      assert entity.has_value?(v)
+    end
   end
 end
