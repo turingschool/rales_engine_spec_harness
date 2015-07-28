@@ -86,9 +86,12 @@ class ItemsApiTest < ApiTest
     assert_equal 233, by_created_at.count
     assert_equal 233, by_updated_at.count
 
-    by_created_at.one? do |i|
-      i["id"] == item["id"] &&
-        i["name"] == item["name"]
-    end
+    assert_one_in_list item, by_id
+    assert_one_in_list item, by_name
+    assert_one_in_list item, by_description
+    assert_one_in_list item, by_unit_price
+    assert_one_in_list item, by_merchant_id
+    assert_one_in_list item, by_created_at
+    assert_one_in_list item, by_updated_at
   end
 end

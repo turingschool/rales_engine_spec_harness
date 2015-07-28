@@ -52,16 +52,16 @@ class MerchantsApiTest < ApiTest
 
 
     assert_equal 1, by_id.count
-    assert_equal 1, by_id.count
+    assert_equal 1, by_name.count
     assert_equal merchant, by_id.first
     assert_equal merchant, by_name.first
 
     assert_equal 7, by_created_at.count
     assert_equal 7, by_updated_at.count
 
-    by_created_at.one? do |merch|
-      merch["id"] == merchant["id"] &&
-        merch["name"] == merchant["name"]
-    end
+    assert_one_in_list merchant, by_id
+    assert_one_in_list merchant, by_name
+    assert_one_in_list merchant, by_created_at
+    assert_one_in_list merchant, by_updated_at
   end
 end

@@ -82,5 +82,12 @@ class CustomerApiTest < ApiTest
     by_updated_at.each do |cust|
       assert_equal customer['updated_at'], cust['updated_at']
     end
+
+    assert_one_in_list customer, by_id
+    assert_one_in_list customer, by_first_name
+    assert_one_in_list customer, by_last_name
+    assert_one_in_list customer, by_full_name
+    assert_one_in_list customer, by_created_at
+    assert_one_in_list customer, by_updated_at
   end
 end

@@ -66,9 +66,15 @@ class InvoicesApiTest < ApiTest
     assert_equal invoice, by_id.first
     assert_equal invoice, by_customer_id[1]
     assert_equal 66, by_merchant_id.first['id']
-
     assert_equal 4843, by_status.count
-    assert_equal invoice, by_created_at.first
-    assert_equal invoice, by_updated_at.first
+    assert_equal 1, by_created_at.count
+    assert_equal 1, by_updated_at.count
+
+    assert_one_in_list invoice, by_id
+    assert_one_in_list invoice, by_customer_id
+    assert_one_in_list invoice, by_merchant_id
+    assert_one_in_list invoice, by_status
+    assert_one_in_list invoice, by_created_at
+    assert_one_in_list invoice, by_updated_at
   end
 end

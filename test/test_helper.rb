@@ -37,4 +37,10 @@ class ApiTest < Minitest::Test
     }
     assert_equal schema[object], entity.keys
   end
+
+  def assert_one_in_list(entity, list)
+    elem_in_list = list.one? {|ele| ele == entity}
+
+    assert elem_in_list, "One and only one instance of entity should appear in list"
+  end
 end

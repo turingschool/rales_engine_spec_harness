@@ -74,9 +74,11 @@ class TransactionsApiTest < ApiTest
     assert_equal 29, by_created_at.count
     assert_equal 29, by_updated_at.count
 
-    by_created_at.one? do |trans|
-      trans["id"] == transaction["id"] &&
-        trans["name"] == transaction["name"]
-    end
+    assert_one_in_list transaction, by_id
+    assert_one_in_list transaction, by_credit_card_number
+    assert_one_in_list transaction, by_invoice_id
+    assert_one_in_list transaction, by_result
+    assert_one_in_list transaction, by_created_at
+    assert_one_in_list transaction, by_updated_at
   end
 end
