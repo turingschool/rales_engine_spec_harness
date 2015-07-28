@@ -38,33 +38,33 @@ class CustomerApiTest < ApiTest
   def test_it_can_find_first_instance_by_id
     by_id = load_data("/api/v1/customers/find?id=#{customer_shayne['id']}")
 
-    assert_equal customer_shayne, by_id
+    assert_hash_equal customer_shayne, by_id
   end
 
   def test_it_can_find_first_instance_by_first_name
     by_first_name = load_data("/api/v1/customers/find?first_name=#{customer_shayne['first_name']}")
 
-    assert_equal customer_shayne, by_first_name
+    assert_hash_equal customer_shayne, by_first_name
   end
 
   def test_it_can_find_first_instance_by_last_name
     by_last_name = load_data("/api/v1/customers/find?last_name=#{customer_shayne['last_name']}")
 
-    assert_equal customer_shayne, by_last_name
+    assert_hash_equal customer_shayne, by_last_name
   end
 
   def test_it_can_find_first_instance_by_full_name
     by_full_name = load_data("/api/v1/customers/find?name=#{full_name_shayne}")
 
-    assert_equal customer_shayne, by_full_name
+    assert_hash_equal customer_shayne, by_full_name
   end
 
   def test_it_can_find_first_instance_by_time_values
     by_created_at = load_data("/api/v1/customers/find?created_at=#{customer_shayne['created_at']}")
     by_updated_at = load_data("/api/v1/customers/find?updated_at=#{customer_shayne['updated_at']}")
 
-    assert_equal customer_shayne, by_created_at
-    assert_equal customer_shayne, by_updated_at
+    assert_hash_equal customer_shayne, by_created_at
+    assert_hash_equal customer_shayne, by_updated_at
   end
 
 

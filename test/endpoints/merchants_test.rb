@@ -33,13 +33,13 @@ class MerchantsApiTest < ApiTest
   def test_it_can_find_first_instance_by_id
   by_id = load_data("/api/v1/merchants/find?id=#{merchant_kwd['id']}")
 
-  assert_equal merchant_kwd, by_id
+  assert_hash_equal merchant_kwd, by_id
   end
 
   def test_it_can_find_first_instance_by_name
   by_name = load_data("/api/v1/merchants/find?name=#{merchant_kwd['name']}")
 
-  assert_equal merchant_kwd, by_name
+  assert_hash_equal merchant_kwd, by_name
   end
 
   def test_it_can_find_first_instance_by_time_values
