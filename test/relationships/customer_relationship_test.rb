@@ -4,12 +4,12 @@ class CustomerApiRelationshipTest < ApiTest
     customer_id = 309
 
     invoices = load_data("/api/v1/customers/#{customer_id}/invoices")
-    assert_equal 6, invoices.count
+    assert_equal 6,    invoices.count
     assert_equal 1602, invoices.first["id"]
-    assert_equal 22, invoices.last["merchant_id"]
+    assert_equal 22,   invoices.last["merchant_id"]
 
     invoices.each do |invoice|
-      assert_equal customer_id, invoice["customer_id"]
+      assert_equal customer_id,     invoice["customer_id"]
       assert_class_equal "invoice", invoice
     end
   end
@@ -18,7 +18,7 @@ class CustomerApiRelationshipTest < ApiTest
     customer_id = 29
 
     transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten
-    assert_equal 8, transactions.count
+    assert_equal 8,   transactions.count
     assert_equal 168, transactions.first["id"]
     assert_equal "4410437213033941", transactions.last["credit_card_number"]
     transactions.each do |transaction|

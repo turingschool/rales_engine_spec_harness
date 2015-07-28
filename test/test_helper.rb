@@ -2,7 +2,6 @@ require "minitest"
 require "minitest/autorun"
 require "faraday"
 require "json"
-require "pry"
 
 class ApiTest < Minitest::Test
   def base_url

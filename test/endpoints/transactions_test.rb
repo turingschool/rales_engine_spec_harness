@@ -23,62 +23,104 @@ class TransactionsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instance_by_any_attribute
-    transaction = {"id"=>3602,
-            "invoice_id"=>3116,
-            "credit_card_number"=>"4367385045579566",
-            "result"=>"success",
-            "created_at"=>"2012-03-27T14:56:42.000Z",
-            "updated_at"=>"2012-03-27T14:56:42.000Z"
+
+  # FINDERS
+  # /find?query=parameters
+
+  def transaction_find
+    {"id"=>                 3602,
+     "invoice_id"=>         3116,
+     "credit_card_number"=> "4367385045579566",
+     "result"=>             "success",
+     "created_at"=>         "2012-03-27T14:56:42.000Z",
+     "updated_at"=>         "2012-03-27T14:56:42.000Z"
     }
+  end
 
-    by_id = load_data("/api/v1/transactions/find?id=#{transaction['id']}")
-    by_invoice_id = load_data("/api/v1/transactions/find?invoice_id=#{transaction['invoice_id']}")
-    by_credit_card_number = load_data("/api/v1/transactions/find?credit_card_number=#{transaction['credit_card_number']}")
-    by_result = load_data("/api/v1/transactions/find?result=#{transaction['result']}")
-    by_created_at = load_data("/api/v1/transactions/find?created_at=#{transaction['created_at']}")
-    by_updated_at = load_data("/api/v1/transactions/find?updated_at=#{transaction['updated_at']}")
+  def test_it_can_find_first_instance_by_id
+    by_id = load_data("/api/v1/transactions/find?id=#{transaction_find['id']}")
 
+    assert_equal transaction_find, by_id
+  end
 
-    assert_equal transaction, by_id
-    assert_equal transaction, by_invoice_id
-    assert_equal transaction, by_credit_card_number
+  def test_it_can_find_first_instance_by_invoice_id
+    by_invoice_id = load_data("/api/v1/transactions/find?invoice_id=#{transaction_find['invoice_id']}")
+
+    assert_equal transaction_find, by_invoice_id
+  end
+
+  def test_it_can_find_first_instance_by_credit_card_number
+    by_credit_card_number = load_data("/api/v1/transactions/find?credit_card_number=#{transaction_find['credit_card_number']}")
+
+    assert_equal transaction_find, by_credit_card_number
+  end
+
+  def test_it_can_find_first_instance_by_result
+    by_result = load_data("/api/v1/transactions/find?result=#{transaction_find['result']}")
+
     assert_equal 1, by_result['id']
+  end
+
+  def test_it_can_find_first_instance_by_time_values
+    by_created_at = load_data("/api/v1/transactions/find?created_at=#{transaction_find['created_at']}")
+    by_updated_at = load_data("/api/v1/transactions/find?updated_at=#{transaction_find['updated_at']}")
+
     assert_equal 3595, by_created_at['id']
     assert_equal 3595, by_updated_at['id']
   end
 
-  def test_it_can_find_all_instances_by_any_attribute
-    transaction = {"id"=>1155,
-            "invoice_id"=>1000,
-            "credit_card_number"=>"4100951707607761",
-            "result"=>"failed",
-            "created_at"=>"2012-03-27T14:54:57.000Z",
-            "updated_at"=>"2012-03-27T14:54:57.000Z"
+
+  # FINDERS
+  # /find_all?query=parameters
+
+  def transaction_find_all
+    {"id"=>                 1155,
+     "invoice_id"=>         1000,
+     "credit_card_number"=> "4100951707607761",
+     "result"=>             "failed",
+     "created_at"=>         "2012-03-27T14:54:57.000Z",
+     "updated_at"=>         "2012-03-27T14:54:57.000Z"
     }
+  end
 
-    by_id = load_data("/api/v1/transactions/find_all?id=#{transaction['id']}")
-    by_invoice_id = load_data("/api/v1/transactions/find_all?invoice_id=#{transaction['invoice_id']}")
-    by_credit_card_number = load_data("/api/v1/transactions/find_all?credit_card_number=#{transaction['credit_card_number']}")
-    by_result = load_data("/api/v1/transactions/find_all?result=#{transaction['result']}")
-    by_created_at = load_data("/api/v1/transactions/find_all?created_at=#{transaction['created_at']}")
-    by_updated_at = load_data("/api/v1/transactions/find_all?updated_at=#{transaction['updated_at']}")
+  def test_it_can_find_all_instances_by_id
+    by_id = load_data("/api/v1/transactions/find_all?id=#{transaction_find_all['id']}")
 
-    assert_equal 1, by_id.count
-    assert_equal 1, by_credit_card_number.count
-    assert_equal transaction, by_id.first
-    assert_equal transaction, by_credit_card_number.first
+    assert_equal 1,                          by_id.count
+    assert_equal transaction_find_all,       by_id.first
+    assert_one_in_list transaction_find_all, by_id
+  end
+
+  def test_it_can_find_all_instances_by_invoice_id
+    by_invoice_id = load_data("/api/v1/transactions/find_all?invoice_id=#{transaction_find_all['invoice_id']}")
 
     assert_equal 2, by_invoice_id.count
+    assert_one_in_list transaction_find_all, by_invoice_id
+  end
+
+  def test_it_can_find_all_instances_by_credit_card_number
+    by_credit_card_number = load_data("/api/v1/transactions/find_all?credit_card_number=#{transaction_find_all['credit_card_number']}")
+
+    assert_equal 1,                          by_credit_card_number.count
+    assert_equal transaction_find_all,       by_credit_card_number.first
+    assert_one_in_list transaction_find_all, by_credit_card_number
+  end
+
+  def test_it_can_find_all_instances_by_result
+    by_result = load_data("/api/v1/transactions/find_all?result=#{transaction_find_all['result']}")
+
     assert_equal 947, by_result.count
+    assert_one_in_list transaction_find_all, by_result
+  end
+
+  def test_it_can_find_all_instances_by_time_values
+    by_created_at = load_data("/api/v1/transactions/find_all?created_at=#{transaction_find_all['created_at']}")
+    by_updated_at = load_data("/api/v1/transactions/find_all?updated_at=#{transaction_find_all['updated_at']}")
+
     assert_equal 29, by_created_at.count
     assert_equal 29, by_updated_at.count
 
-    assert_one_in_list transaction, by_id
-    assert_one_in_list transaction, by_credit_card_number
-    assert_one_in_list transaction, by_invoice_id
-    assert_one_in_list transaction, by_result
-    assert_one_in_list transaction, by_created_at
-    assert_one_in_list transaction, by_updated_at
+    assert_one_in_list transaction_find_all, by_created_at
+    assert_one_in_list transaction_find_all, by_updated_at
   end
 end

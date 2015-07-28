@@ -16,8 +16,8 @@ class ItemApiRelationshipTest < ApiTest
 
     merchant = load_data("/api/v1/items/#{item_id}/merchant").first
 
-    assert_equal 32, merchant["id"]
-    assert_equal "Rowe and Sons", merchant["name"]
+    assert_equal 32,               merchant["id"]
+    assert_equal "Rowe and Sons",  merchant["name"]
     assert_class_equal "merchant", merchant
   end
 end
