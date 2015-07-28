@@ -36,13 +36,13 @@ class InvoicesApiTest < ApiTest
   def test_it_can_find_first_instances_by_id
     by_id = load_data("/api/v1/invoices/find?id=#{invoice_find['id']}")
 
-    assert_equal invoice_find, by_id
+    assert_hash_equal invoice_find, by_id
   end
 
   def test_it_can_find_first_instances_by_customer_id
     by_customer_id = load_data("/api/v1/invoices/find?customer_id=#{invoice_find['customer_id']}")
 
-    assert_equal invoice_find, by_customer_id
+    assert_hash_equal invoice_find, by_customer_id
   end
 
   def test_it_can_find_first_instances_by_merchant_id
@@ -61,8 +61,8 @@ class InvoicesApiTest < ApiTest
     by_created_at = load_data("/api/v1/invoices/find?created_at=#{invoice_find['created_at']}")
     by_updated_at = load_data("/api/v1/invoices/find?updated_at=#{invoice_find['updated_at']}")
 
-    assert_equal invoice_find, by_created_at
-    assert_equal invoice_find, by_updated_at
+    assert_hash_equal invoice_find, by_created_at
+    assert_hash_equal invoice_find, by_updated_at
   end
 
 

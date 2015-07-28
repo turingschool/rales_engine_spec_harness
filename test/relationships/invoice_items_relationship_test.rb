@@ -6,7 +6,7 @@ class InvoiceItemsApiTest < ApiTest
     item = load_data("/api/v1/invoice_items/#{invoice_item_id}/item")
     assert_equal 203,           item["id"]
     assert_equal "Item At Qui", item["name"]
-    assert_class_equal "item",  item
+    assert_class_equal "item", item
   end
 
   def test_loads_the_associated_invoice

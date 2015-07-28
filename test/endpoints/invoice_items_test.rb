@@ -3,9 +3,9 @@ require "./test/test_helper"
 class InvoiceItemsApiTest < ApiTest
   def test_loads_individual_invoice_items
     #invoice_id => [item_id, invoice_id, quantity, unit_price]
-    invoice_items = {10110 => [1223, 2277, 9, 21916],
-                     18191 => [610, 4063, 5, 57645],
-                     21533 => [543, 4807, 4, 6056]
+    invoice_items = {10110 => [1223, 2277, 9, 21916.0],
+                     18191 => [610, 4063, 5, 57645.0],
+                     21533 => [543, 4807, 4, 6056.0]
     }
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
@@ -33,7 +33,7 @@ class InvoiceItemsApiTest < ApiTest
      "item_id"=>     574,
      "invoice_id"=>  4477,
      "quantity"=>    2,
-     "unit_price"=>  83363,
+     "unit_price"=>  83363.0,
      "created_at"=> "2012-03-27T14:57:57.000Z",
      "updated_at"=> "2012-03-27T14:57:57.000Z"
     }
@@ -42,7 +42,7 @@ class InvoiceItemsApiTest < ApiTest
   def test_it_can_find_first_instances_by_id
     by_id = load_data("/api/v1/invoice_items/find?id=#{invoice_find['id']}")
 
-    assert_equal invoice_find, by_id
+    assert_hash_equal invoice_find, by_id
   end
 
   def test_it_can_find_first_instances_by_id
@@ -85,7 +85,7 @@ class InvoiceItemsApiTest < ApiTest
      "item_id"=>    574,
      "invoice_id"=> 4477,
      "quantity"=>   2,
-     "unit_price"=> 83363,
+     "unit_price"=> 83363.0,
      "created_at"=> "2012-03-27T14:57:57.000Z",
      "updated_at"=> "2012-03-27T14:57:57.000Z"
     }

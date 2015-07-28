@@ -40,19 +40,19 @@ class TransactionsApiTest < ApiTest
   def test_it_can_find_first_instance_by_id
     by_id = load_data("/api/v1/transactions/find?id=#{transaction_find['id']}")
 
-    assert_equal transaction_find, by_id
+    assert_hash_equal transaction_find, by_id
   end
 
   def test_it_can_find_first_instance_by_invoice_id
     by_invoice_id = load_data("/api/v1/transactions/find?invoice_id=#{transaction_find['invoice_id']}")
 
-    assert_equal transaction_find, by_invoice_id
+    assert_hash_equal transaction_find, by_invoice_id
   end
 
   def test_it_can_find_first_instance_by_credit_card_number
     by_credit_card_number = load_data("/api/v1/transactions/find?credit_card_number=#{transaction_find['credit_card_number']}")
 
-    assert_equal transaction_find, by_credit_card_number
+    assert_hash_equal transaction_find, by_credit_card_number
   end
 
   def test_it_can_find_first_instance_by_result
