@@ -1,7 +1,6 @@
 require "./test/test_helper"
-
 class CustomerApiRelationshipTest < ApiTest
-  def test_loads_all_invoices_of_one_customer
+  def test_loads_a_collection_of_invoices_associated_with_one_customer
     customer_id = 309
 
     invoices = load_data("/api/v1/customers/#{customer_id}/invoices")
@@ -15,7 +14,7 @@ class CustomerApiRelationshipTest < ApiTest
     end
   end
 
-  def test_loads_all_transactions_of_one_customer
+  def test_loads_a_collection_of_transaction_associated_with_one_customer
     customer_id = 29
 
     transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten

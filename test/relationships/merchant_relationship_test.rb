@@ -1,7 +1,6 @@
 require "./test/test_helper"
-
 class MerchantsApiTest < ApiTest
-  def test_returns_a_collection_of_items_associated_with_one_merchant
+  def test_loads_a_collection_of_items_associated_with_one_merchant
     merchant_id = 99
 
     items = load_data("/api/v1/merchants/#{merchant_id}/items")
@@ -15,7 +14,7 @@ class MerchantsApiTest < ApiTest
     end
   end
 
-  def test_returns_a_collection_of_invoices_associated_with_one_merchant
+  def test_loads_a_collection_of_invoices_associated_with_one_merchant
     merchant_id = 2
 
     invoices = load_data("/api/v1/merchants/#{merchant_id}/invoices")

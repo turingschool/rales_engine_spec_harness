@@ -1,7 +1,6 @@
 require "./test/test_helper"
-
 class ItemApiRelationshipTest < ApiTest
-  def test_loads_all_invoice_items_of_one_or_more_items
+  def test_loads_a_collection_of_invoice_items_associated_with_one_merchant
     id = 2015
 
     invoice_items = load_data("/api/v1/items/#{id}/invoice_items").first
@@ -12,7 +11,7 @@ class ItemApiRelationshipTest < ApiTest
     end
   end
 
-  def test_loads_merchant_of_one_or_more_items
+  def test_loads_the_associated_invoice
     item_id = 676
 
     merchant = load_data("/api/v1/items/#{item_id}/merchant").first
@@ -21,5 +20,4 @@ class ItemApiRelationshipTest < ApiTest
     assert_equal "Rowe and Sons", merchant["name"]
     assert_class_equal "merchant", merchant
   end
-
 end
