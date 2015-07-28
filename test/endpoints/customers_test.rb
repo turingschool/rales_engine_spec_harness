@@ -46,7 +46,7 @@ class CustomerApiTest < ApiTest
                 "created_at"=>"2012-03-27T14:54:27.000Z",
                 "updated_at"=>"2012-03-27T14:54:27.000Z"
     }
-    full_name = "Anibal-Boyle"
+    full_name = "Anibal Boyle"
 
     by_id = load_data("/api/v1/customers/find_all?id=#{customer['id']}")
     by_first_name = load_data("/api/v1/customers/find_all?first_name=#{customer['first_name']}")
