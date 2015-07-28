@@ -1,16 +1,15 @@
 require "./test/test_helper"
+class CustomerApiBusinessLogicTest < ApiTest
+  def test_loads_the_favorite_merchant_associated_with_one_customer
+    customer_id_one = 66
+    customer_id_two = 33
+    fav_merch_one   = load_data("/api/v1/customers/#{customer_id_one}/favorite_merchant")
+    fav_merch_two   = load_data("/api/v1/customers/#{customer_id_two}/favorite_merchant")
 
-class CustomerApiExtensionTest < ApiTest
-  def test_loads_all_transactions_of_one_customer
-    customer_id = 88
-    transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten.sort_by {|t| t["id"]}
+    assert_equal 94,          fav_merch_one.id
+    assert_equal "Boehm LLC", fav_merch_one.name
 
-    assert_equal 10, transactions.count
-    assert_equal 427, transactions[2]["invoice_id"]
-    assert_equal "failed", transactions[6]["result"]
-    assert_equal "4870601195394267", transactions.last["credit_card_number"]
-    transactions.each do |transaction|
-      assert_class_equal "transaction", transaction
-    end
+    assert_equal 69,                 fav_merch_two.id
+    assert_equal "Watsica-Parisian", fav_merch_two.name
   end
 end
