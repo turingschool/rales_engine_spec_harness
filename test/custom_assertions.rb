@@ -27,7 +27,7 @@ module CustomAssertions
 
   def assert_hash_equal(object, entity)
     object.values.each do |v|
-      assert entity.has_value?(v)
+      assert entity.has_value?(v), "Value #{v} not found in #{entity}"
     end
   end
 
@@ -35,6 +35,6 @@ module CustomAssertions
     result = entities.any? do |e|
       e.has_value?(attr)
     end
-    assert result
+    assert result, "#{attr} not found in collection"
   end
 end

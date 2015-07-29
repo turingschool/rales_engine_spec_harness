@@ -71,7 +71,7 @@ class ItemsApiTest < ApiTest
   def test_it_can_find_first_instances_by_merchant_id
     by_merchant_id = load_data("/api/v1/items/find?merchant_id=#{item_find['merchant_id']}")
 
-    assert_equal 1328, by_merchant_id['id']
+    assert_equal 1370, by_merchant_id['id']
   end
 
   def test_it_can_find_first_instances_by_time_values

@@ -25,8 +25,8 @@ class ItemApiBusinessLogicTest < ApiTest
       assert_equal "Item Dicta Autem", total.first['name']
     end
 
-    assert_response_has_attribute 104,             total_revenue_one
-    assert_response_has_attribute "Item Et Sequi", total_revenue_one
+    assert_response_has_attribute 104,             total_revenue_two
+    assert_response_has_attribute "Item Et Sequi", total_revenue_two
   end
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_revenue

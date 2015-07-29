@@ -48,13 +48,13 @@ class InvoiceItemsApiTest < ApiTest
   def test_it_can_find_first_instances_by_item_id
     by_item_id = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")
 
-    assert_equal 5822, by_item_id['id']
+    assert_equal 20097, by_item_id['id']
   end
 
   def test_it_can_find_first_instances_by_invoice_id
     by_invoice_id = load_data("/api/v1/invoice_items/find?invoice_id=#{invoice_find['invoice_id']}")
 
-    assert_equal 20093, by_invoice_id['id']
+    assert_equal 20098, by_invoice_id['id']
   end
 
   def test_it_can_find_first_instances_by_quantity
