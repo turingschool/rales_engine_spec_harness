@@ -5,7 +5,7 @@ class ItemApiRelationshipTest < ApiTest
 
     invoice_items = load_data("/api/v1/items/#{id}/invoice_items").first
 
-    assert_equal 8, invoice_items.count
+    assert_equal 7, invoice_items.count
     invoice_items.each do |invoice_item|
       assert_equal 2015, invoice_item["item_id"]
     end
