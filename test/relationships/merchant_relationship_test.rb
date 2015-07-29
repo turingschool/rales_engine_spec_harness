@@ -5,8 +5,8 @@ class MerchantsApiTest < ApiTest
 
     items = load_data("/api/v1/merchants/#{merchant_id}/items")
     assert_equal 42,   items.count
-    assert_equal 2397, items.first["id"]
-    assert_equal 2438, items.last["id"]
+    assert_equal 2438, items.first["id"]
+    assert_equal 2397, items.last["id"]
 
     items.each do |item|
       assert_equal merchant_id, item["merchant_id"]
