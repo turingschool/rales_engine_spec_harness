@@ -18,6 +18,5 @@ class ApiTest < Minitest::Test
   def load_data(path)
     r = connection.get(path)
     assert_equal 200, r.status, "Expected Status Code 200, got #{r.status}"
-    assert_valid_json(r.body)
   end
 end
