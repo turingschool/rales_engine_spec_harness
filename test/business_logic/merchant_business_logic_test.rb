@@ -1,14 +1,16 @@
 require "./test/test_helper"
 class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_favorite_customer_associated_with_one_merchant
-    merchant_id_one = 7
-    merchant_id_two = 70
+    merchant_id_one = 8
+    merchant_id_two = 80
 
     favorite_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/favorite_customer")
     favorite_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/favorite_customer")
 
-    assert_equal 603, favorite_customer_one['id']
-    assert_equal 993, favorite_customer_two['id']
+    assert_equal Array, favorite_customer_one.class
+    assert_equal Array, favorite_customer_two.class
+    assert_equal 1000,  favorite_customer_one.first['id']
+    assert_equal 458,   favorite_customer_two.first['id']
   end
 
   def test_loads_the_customers_with_pending_invoices_associated_with_one_merchant
@@ -20,8 +22,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
 
     assert_equal 2,   pending_customer_one.size
     assert_equal 1,   pending_customer_two.size
-    assert_equal 197, pending_customer_one.first['id']
-    assert_equal 28,  pending_customer_two.first['id']
+    assert_response_has_attribute 197, pending_customer_one
+    assert_response_has_attribute 28,  pending_customer_two
   end
 
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant
@@ -31,8 +33,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue")
     revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue")
 
-    assert_equal 483105.56,   revenue_one
-    assert_equal 563785.89,   revenue_two
+    assert_equal "483105.56",   revenue_one
+    assert_equal "563785.89",   revenue_two
   end
 
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant_by_date
@@ -45,8 +47,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")
     revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue?date=#{date_two}")
 
-    assert_equal 47424.45,   revenue_one
-    assert_equal 8116.35,    revenue_two
+    assert_equal "47424.45",   revenue_one
+    assert_equal "8116.35",    revenue_two
   end
 end
 
@@ -58,11 +60,9 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
     total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")
     total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")
 
-    assert_equal 2718916.39, total_revenue_one
-    assert_equal 1908368.05, total_revenue_two
+    assert_equal "2718916.39", total_revenue_one
+    assert_equal "1908368.05", total_revenue_two
   end
-
-  #GET /api/v1/merchants/most_items?quantity=x returns the top x merchants ranked by total number of items solddef test_
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_revenue
     group_size_one = 1
@@ -79,8 +79,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
       assert_equal "Dicki-Bednar", total.first['name']
     end
 
-    assert_equal 53,                          total_revenue_one[6]['id']
-    assert_equal "Rath, Gleason and Spencer", total_revenue_one[6]['name']
+    assert_response_has_attribute 53,                          total_revenue_one
+    assert_response_has_attribute "Rath, Gleason and Spencer", total_revenue_one
   end
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_items_sold
@@ -98,7 +98,7 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
       assert_equal "Kozey Group", total.first['name']
     end
 
-    assert_equal 58,           total_revenue_one[6]['id']
-    assert_equal "Rogahn LLC", total_revenue_one[6]['name']
+    assert_response_has_attribute 58,           total_revenue_one
+    assert_response_has_attribute "Rogahn LLC", total_revenue_one
   end
 end

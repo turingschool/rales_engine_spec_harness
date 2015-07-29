@@ -92,7 +92,6 @@ class InvoicesApiTest < ApiTest
     by_customer_id = load_data("/api/v1/invoices/find_all?customer_id=#{invoice_find_all['customer_id']}")
 
     assert_equal 4,                      by_customer_id.count
-    assert_equal invoice_find_all,       by_customer_id[1]
     assert_one_in_list invoice_find_all, by_customer_id
   end
 

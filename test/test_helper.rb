@@ -3,8 +3,10 @@ require "minitest/autorun"
 require "faraday"
 require "json"
 require "pry"
+require "./test/custom_assertions"
 
 class ApiTest < Minitest::Test
+  include CustomAssertions
   def base_url
     ENV["BASE_URL"] || "http://localhost:3000"
   end
@@ -17,37 +19,5 @@ class ApiTest < Minitest::Test
     r = connection.get(path)
     assert_equal 200, r.status, "Expected Status Code 200, got #{r.status}"
     assert_valid_json(r.body)
-  end
-
-  def assert_valid_json(data)
-    parsed = JSON.parse(data)
-    assert [Array, Hash].include?(parsed.class)
-    parsed
-  rescue JSON::ParserError
-    flunk("Expected #{data} to be valid JSON.")
-  end
-
-  def assert_class_equal(object, entity)
-    schema = {"transaction" => ["id", "invoice_id", "credit_card_number", "result", "created_at", "updated_at"],
-              "merchant" => ["id", "name", "created_at", "updated_at"],
-              "customer" => ["id", "first_name", "last_name", "created_at", "updated_at"],
-              "invoice" => ["id", "customer_id", "merchant_id", "status", "created_at", "updated_at"],
-              "invoice_item" => ["id", "item_id", "invoice_id", "quantity", "unit_price", "created_at", "updated_at"],
-              "item" => ["id", "name", "description", "unit_price", "merchant_id", "created_at", "updated_at"]
-    }
-    assert_equal schema[object].sort, entity.keys.sort
-
-  end
-
-  def assert_one_in_list(entity, list)
-    elem_in_list = list.one? {|ele| ele == entity}
-
-    assert elem_in_list, "One and only one instance of entity should appear in list"
-  end
-
-  def assert_hash_equal(object, entity)
-    object.values.each do |v|
-      assert entity.has_value?(v)
-    end
   end
 end
