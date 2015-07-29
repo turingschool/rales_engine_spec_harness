@@ -24,12 +24,12 @@ class InvoicesApiTest < ApiTest
   # /find?query=parameters
 
   def invoice_find
-    invoice = {"id"=>          3811,
-               "customer_id"=> 782,
-               "merchant_id"=> 51,
-               "status"=>     "shipped",
-               "created_at"=> "2012-03-09T08:57:21.000Z",
-               "updated_at"=> "2012-03-09T08:57:21.000Z"
+    {"id"=>          3811,
+     "customer_id"=> 782,
+     "merchant_id"=> 51,
+     "status"=>     "shipped",
+     "created_at"=> "2012-03-09T08:57:21.000Z",
+     "updated_at"=> "2012-03-09T08:57:21.000Z"
     }
   end
 
