@@ -1,14 +1,16 @@
 require "./test/test_helper"
 class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_favorite_customer_associated_with_one_merchant
-    merchant_id_one = 7
-    merchant_id_two = 70
+    merchant_id_one = 8
+    merchant_id_two = 80
 
     favorite_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/favorite_customer")
     favorite_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/favorite_customer")
 
-    assert_equal 603, favorite_customer_one['id']
-    assert_equal 993, favorite_customer_two['id']
+    assert_equal Array, favorite_customer_one.class
+    assert_equal Array, favorite_customer_two.class
+    assert_equal 1000,  favorite_customer_one.first['id']
+    assert_equal 458,   favorite_customer_two.first['id']
   end
 
   def test_loads_the_customers_with_pending_invoices_associated_with_one_merchant
