@@ -45,31 +45,31 @@ class InvoiceItemsApiTest < ApiTest
     assert_hash_equal invoice_find, by_id
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instances_by_item_id
     by_item_id = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")
 
     assert_equal 5822, by_item_id['id']
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instances_by_invoice_id
     by_invoice_id = load_data("/api/v1/invoice_items/find?invoice_id=#{invoice_find['invoice_id']}")
 
     assert_equal 20093, by_invoice_id['id']
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instances_by_quantity
     by_quantity = load_data("/api/v1/invoice_items/find?quantity=#{invoice_find['quantity']}")
 
     assert_equal 21, by_quantity['id']
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instances_by_unit_price
     by_unit_price = load_data("/api/v1/invoice_items/find?unit_price=#{invoice_find['unit_price']}")
 
     assert_equal 822, by_unit_price['id']
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instances_by_time_value
     by_created_at = load_data("/api/v1/invoice_items/find?created_at=#{invoice_find['created_at']}")
     by_updated_at = load_data("/api/v1/invoice_items/find?updated_at=#{invoice_find['updated_at']}")
 
