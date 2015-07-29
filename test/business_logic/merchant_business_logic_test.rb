@@ -1,4 +1,6 @@
 require "./test/test_helper"
+require "date"
+
 class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_favorite_customer_associated_with_one_merchant
     merchant_id_one = 8
@@ -9,8 +11,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
 
     assert_equal Array, favorite_customer_one.class
     assert_equal Array, favorite_customer_two.class
-    assert_equal 1000,  favorite_customer_one.first['id']
-    assert_equal 458,   favorite_customer_two.first['id']
+    assert_response_has_attribute 1000,  favorite_customer_one
+    assert_response_has_attribute 458,   favorite_customer_two
   end
 
   def test_loads_the_customers_with_pending_invoices_associated_with_one_merchant
@@ -95,7 +97,7 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
 
     [total_revenue_one, total_revenue_two].each do |total|
       assert_equal 89,            total.first['id']
-      assert_equal "Kozey Group", total.first['name']
+      assert_equal "Kassulke, O'Hara and Quitzon", total.first['name']
     end
 
     assert_response_has_attribute 58,           total_revenue_one
