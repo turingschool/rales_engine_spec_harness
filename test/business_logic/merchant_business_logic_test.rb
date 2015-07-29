@@ -81,8 +81,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
       assert_equal "Dicki-Bednar", total.first['name']
     end
 
-    assert_response_has_attribute 53,                          total_revenue_one
-    assert_response_has_attribute "Rath, Gleason and Spencer", total_revenue_one
+    assert_response_has_attribute 53,                          total_revenue_two
+    assert_response_has_attribute "Rath, Gleason and Spencer", total_revenue_two
   end
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_items_sold
@@ -100,7 +100,7 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
       assert_equal "Kassulke, O'Hara and Quitzon", total.first['name']
     end
 
-    assert_response_has_attribute 58,           total_revenue_one
-    assert_response_has_attribute "Rogahn LLC", total_revenue_one
+    assert_response_has_attribute 58,           total_revenue_two
+    assert_response_has_attribute "Rogahn LLC", total_revenue_two
   end
 end

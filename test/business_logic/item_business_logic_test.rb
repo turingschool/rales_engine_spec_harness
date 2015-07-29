@@ -21,8 +21,8 @@ class ItemApiBusinessLogicTest < ApiTest
     assert_equal group_size_two, total_revenue_two.size
 
     [total_revenue_one, total_revenue_two].each do |total|
-      assert_equal 227,                total.first['id']
-      assert_equal "Item Dicta Autem", total.first['name']
+      assert_equal 227,                total.last['id']
+      assert_equal "Item Dicta Autem", total.last['name']
     end
 
     assert_response_has_attribute 104,             total_revenue_two
@@ -44,7 +44,7 @@ class ItemApiBusinessLogicTest < ApiTest
       assert_equal "Item Dicta Autem", total.first['name']
     end
 
-    assert_response_has_attribute 2174,              total_revenue_one
-    assert_response_has_attribute "Item Nam Magnam", total_revenue_one
+    assert_response_has_attribute 2174,              total_revenue_two
+    assert_response_has_attribute "Item Nam Magnam", total_revenue_two
   end
 end
