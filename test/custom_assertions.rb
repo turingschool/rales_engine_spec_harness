@@ -1,7 +1,7 @@
 module CustomAssertions
   def assert_valid_json(data)
-    parsed = JSON.parse(data)
-    assert [Array, Hash].include?(parsed.class)
+    parsed = JSON.parse(data, :quirks_mode => true)
+    assert [Array, Hash, String].include?(parsed.class)
     parsed
   rescue JSON::ParserError
     flunk("Expected #{data} to be valid JSON.")
