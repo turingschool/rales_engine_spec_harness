@@ -50,7 +50,7 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue?date=#{date_two}")
 
     assert_equal "47424.45",   revenue_one
-    assert_equal "8116.35",    revenue_two
+    assert_equal "4671.73",    revenue_two
   end
 end
 
