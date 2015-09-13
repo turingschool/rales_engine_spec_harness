@@ -1,6 +1,23 @@
 require "./test/test_helper"
 
 class MerchantsApiTest < ApiTest
+  def test_a_null_message_when_merchant_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/merchants/#{id}")
+    nulls << all_id         = load_data("/api/v1/merchants/find_all?id=#{id}")
+    nulls << name           = load_data("/api/v1/merchants/find?name=#{id}")
+    nulls << all_name       = load_data("/api/v1/merchants/find_all?name=#{id}")
+    nulls << created_at     = load_data("/api/v1/merchants/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/merchants/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/merchants/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/merchants/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Merchant record #{id} not found", null["error"]
+    end
+  end
+
   def test_loads_individual_merchants
     #transaction_id => "name"
     merchants = {6 => "Williamson Group", 75 => "Eichmann-Turcotte", 43 => "Marks, Shanahan and Bauch"}
