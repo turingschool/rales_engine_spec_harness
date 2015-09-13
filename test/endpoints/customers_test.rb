@@ -1,8 +1,27 @@
 require "./test/test_helper"
 
 class CustomerApiTest < ApiTest
+  def test_a_null_message_when_customer_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/customers/#{id}")
+    nulls << all_id         = load_data("/api/v1/customers/find_all?id=#{id}")
+    nulls << first_name     = load_data("/api/v1/customers/find?first_name=#{id}")
+    nulls << all_first_name = load_data("/api/v1/customers/find_all?first_name=#{id}")
+    nulls << last_name      = load_data("/api/v1/customers/find?last_name=#{id}")
+    nulls << all_last_name  = load_data("/api/v1/customers/find_all?last_name=#{id}")
+    nulls << created_at     = load_data("/api/v1/customers/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/customers/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/customers/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/customers/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Customer record #{id} not found", null["error"]
+    end
+  end
+
   def test_loads_individual_customers
-    #invoice_id => [first_name, last_name]
+    #customer_id => [first_name, last_name]
     customers = {15 => ["Magnus", "Sipes"], 305 => ["Vivienne", "Kunze"], 968 => ["Norma", "Sipes"]}
     customers.each do |id, (first_name, last_name)|
       data = load_data("/api/v1/customers/#{id}")
