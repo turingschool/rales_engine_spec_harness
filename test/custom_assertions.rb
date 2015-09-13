@@ -16,7 +16,6 @@ module CustomAssertions
               "item" => ["id", "name", "description", "unit_price", "merchant_id", "created_at", "updated_at"]
     }
     assert_equal schema[object].sort, entity.keys.sort
-
   end
 
   def assert_one_in_list(entity, list)
