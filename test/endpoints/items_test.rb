@@ -1,5 +1,29 @@
 require "./test/test_helper"
+
 class ItemsApiTest < ApiTest
+  def test_a_null_message_when_item_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/items/#{id}")
+    nulls << all_id         = load_data("/api/v1/items/find_all?id=#{id}")
+    nulls << name           = load_data("/api/v1/items/find?name=#{id}")
+    nulls << all_name       = load_data("/api/v1/items/find_all?name=#{id}")
+    nulls << description    = load_data("/api/v1/items/find?description=#{id}")
+    nulls << all_descript   = load_data("/api/v1/items/find_all?description=#{id}")
+    nulls << unit_price     = load_data("/api/v1/items/find?unit_price=#{id}")
+    nulls << all_unit_price = load_data("/api/v1/items/find_all?unit_price=#{id}")
+    nulls << merch_id       = load_data("/api/v1/items/find?merchant_id=#{id}")
+    nulls << all_merch_id   = load_data("/api/v1/items/find_all?merchant_id=#{id}")
+    nulls << created_at     = load_data("/api/v1/items/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/items/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/items/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/items/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Item record #{id} not found", null["error"]
+    end
+  end
+
   def test_loads_individual_items
     descriptions = ["Architecto doloribus id ex porro. Dolor sit aut nobis iusto sequi accusamus corrupti. Cumque provident possimus quia similique. Aperiam atque maxime placeat nihil facilis magnam aut. Repellat aut officiis minima quibusdam facere.",
                     "Ea sunt ad asperiores sint quam provident vel. Asperiores est sit sunt dolorum cumque labore. Praesentium quibusdam accusantium. Autem est ex. Quia illum molestias repellendus.",
