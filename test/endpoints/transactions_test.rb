@@ -1,7 +1,7 @@
 require "./test/test_helper"
 
 class TransactionsApiTest < ApiTest
-  def test_a_null_message_when_item_params_doesnt_exist
+  def test_a_null_message_when_transaction_params_doesnt_exist
     id = rand(200_000..400_000)
     nulls = []
     nulls << one_id         = load_data("/api/v1/transactions/#{id}")

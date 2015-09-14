@@ -21,6 +21,7 @@ class InvoicesApiTest < ApiTest
       assert_equal "Invoice record #{id} not found", null["error"]
     end
   end
+
   def test_loads_individual_invoices
     #invoice_id => [customer_id, merchant_id]
     invoices = {117 => [22, 84], 1337 => [262, 78], 4815 => [993, 77]}

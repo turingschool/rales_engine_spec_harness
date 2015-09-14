@@ -20,7 +20,7 @@ class InvoiceItemsApiTest < ApiTest
     nulls << all_updated_at = load_data("/api/v1/invoice_items/find_all?updated_at=#{id}")
 
     nulls.each do |null|
-      assert_equal "Invoice Item record #{id} not found", null["error"]
+      assert_equal "InvoiceItem record #{id} not found", null["error"]
     end
   end
   def test_loads_individual_invoice_items
