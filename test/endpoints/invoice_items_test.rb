@@ -1,6 +1,28 @@
 require "./test/test_helper"
 
 class InvoiceItemsApiTest < ApiTest
+  def test_a_null_message_when_invoice_item_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/invoice_items/#{id}")
+    nulls << all_id         = load_data("/api/v1/invoice_items/find_all?id=#{id}")
+    nulls << item_id        = load_data("/api/v1/invoice_items/find?item_id=#{id}")
+    nulls << all_item_id    = load_data("/api/v1/invoice_items/find_all?item_id=#{id}")
+    nulls << invoice_id     = load_data("/api/v1/invoice_items/find?invoice_id=#{id}")
+    nulls << all_invoice_id = load_data("/api/v1/invoice_items/find_all?invoice_id=#{id}")
+    nulls << quantity       = load_data("/api/v1/invoice_items/find?quantity=#{id}")
+    nulls << all_quantity   = load_data("/api/v1/invoice_items/find_all?quantity=#{id}")
+    nulls << unit_price     = load_data("/api/v1/invoice_items/find?unit_price=#{id}")
+    nulls << all_unit_price = load_data("/api/v1/invoice_items/find_all?unit_price=#{id}")
+    nulls << created_at     = load_data("/api/v1/invoice_items/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/invoice_items/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/invoice_items/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/invoice_items/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Invoice Item record #{id} not found", null["error"]
+    end
+  end
   def test_loads_individual_invoice_items
     #invoice_id => [item_id, invoice_id, quantity, unit_price]
     invoice_items = {10110 => [1223, 2277, 9, "21916.0"],
