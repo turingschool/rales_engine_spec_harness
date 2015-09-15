@@ -24,7 +24,7 @@ class InvoiceItemsApiTest < ApiTest
     end
   end
   def test_loads_individual_invoice_items
-    #invoice_id => [item_id, invoice_id, quantity, unit_price]
+    #invoice_item_id => [item_id, invoice_id, quantity, unit_price]
     invoice_items = {10110 => [1223, 2277, 9, "21916.0"],
                      18191 => [610, 4063, 5, "57645.0"],
                      21533 => [543, 4807, 4, "6056.0"]

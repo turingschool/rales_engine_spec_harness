@@ -19,7 +19,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_loads_individual_merchants
-    #transaction_id => "name"
+    #merchant_id => "name"
     merchants = {6 => "Williamson Group", 75 => "Eichmann-Turcotte", 43 => "Marks, Shanahan and Bauch"}
     merchants.each do |id, name|
       data = load_data("/api/v1/merchants/#{id}")
