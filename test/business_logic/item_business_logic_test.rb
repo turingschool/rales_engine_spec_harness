@@ -1,5 +1,12 @@
 require "./test/test_helper"
 class ItemApiBusinessLogicTest < ApiTest
+  def test_a_null_message_when_item_doesnt_exist
+    id = rand(200_000..400_000)
+    best_day = load_data("/api/v1/items/#{id}/best_day")
+
+    assert_equal "Item record #{id} not found", best_day["error"]
+  end
+
   def test_loads_the_best_day_associated_with_one_item
     item_id_one  = 1099
     item_id_two  = 2198

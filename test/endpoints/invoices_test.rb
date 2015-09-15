@@ -1,6 +1,27 @@
 require "./test/test_helper"
 
 class InvoicesApiTest < ApiTest
+  def test_a_null_message_when_invoice_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/invoices/#{id}")
+    nulls << all_id         = load_data("/api/v1/invoices/find_all?id=#{id}")
+    nulls << merch_id       = load_data("/api/v1/invoices/find?merchant_id=#{id}")
+    nulls << all_merch_id   = load_data("/api/v1/invoices/find_all?merchant_id=#{id}")
+    nulls << cust_id        = load_data("/api/v1/invoices/find?customer_id=#{id}")
+    nulls << all_cust_id    = load_data("/api/v1/invoices/find_all?customer_id=#{id}")
+    nulls << status         = load_data("/api/v1/invoices/find?status=#{id}")
+    nulls << all_status     = load_data("/api/v1/invoices/find_all?status=#{id}")
+    nulls << created_at     = load_data("/api/v1/invoices/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/invoices/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/invoices/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/invoices/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Invoice record #{id} not found", null["error"]
+    end
+  end
+
   def test_loads_individual_invoices
     #invoice_id => [customer_id, merchant_id]
     invoices = {117 => [22, 84], 1337 => [262, 78], 4815 => [993, 77]}

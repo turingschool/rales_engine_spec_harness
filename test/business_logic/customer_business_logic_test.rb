@@ -1,5 +1,12 @@
 require "./test/test_helper"
 class CustomerApiBusinessLogicTest < ApiTest
+  def test_a_null_message_when_customer_doesnt_exist
+    id = rand(200_000..400_000)
+    merchant = load_data("/api/v1/customers/#{id}/favorite_merchant")
+
+    assert_equal "Customer record #{id} not found", merchant["error"]
+  end
+
   def test_loads_the_favorite_merchant_associated_with_one_customer
     customer_id_one = 66
     customer_id_two = 33

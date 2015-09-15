@@ -1,6 +1,25 @@
 require "./test/test_helper"
 
 class TransactionsApiTest < ApiTest
+  def test_a_null_message_when_transaction_params_doesnt_exist
+    id = rand(200_000..400_000)
+    nulls = []
+    nulls << one_id         = load_data("/api/v1/transactions/#{id}")
+    nulls << all_id         = load_data("/api/v1/transactions/find_all?id=#{id}")
+    nulls << credit_card    = load_data("/api/v1/transactions/find?credit_card_number=#{id}")
+    nulls << all_credit     = load_data("/api/v1/transactions/find_all?credit_card_number=#{id}")
+    nulls << one_result     = load_data("/api/v1/transactions/find?result=#{id}")
+    nulls << all_result     = load_data("/api/v1/transactions/find_all?result=#{id}")
+    nulls << created_at     = load_data("/api/v1/transactions/find?created_at=#{id}")
+    nulls << all_created_at = load_data("/api/v1/transactions/find_all?created_at=#{id}")
+    nulls << updated_at     = load_data("/api/v1/transactions/find?updated_at=#{id}")
+    nulls << all_updated_at = load_data("/api/v1/transactions/find_all?updated_at=#{id}")
+
+    nulls.each do |null|
+      assert_equal "Transaction record #{id} not found", null["error"]
+    end
+  end
+
   def test_loads_individual_transactions
     #transaction_id => [invoice_id, credit_card_number, result]
     transactions = {1412 => [1224, "4330934842024570", "success"],

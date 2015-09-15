@@ -1,5 +1,14 @@
 require "./test/test_helper"
 class InvoiceItemsApiTest < ApiTest
+  def test_a_null_message_when_invoice_item_doesnt_exist
+    id = rand(200_000..400_000)
+    item    = load_data("/api/v1/invoice_items/#{id}/item")
+    invoice = load_data("/api/v1/invoice_items/#{id}/invoice")
+
+    assert_equal "InvoiceItem record #{id} not found", item["error"]
+    assert_equal "InvoiceItem record #{id} not found", invoice["error"]
+  end
+
   def test_loads_the_associated_item
     invoice_item_id = 99
 
