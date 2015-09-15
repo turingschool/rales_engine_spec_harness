@@ -2,6 +2,17 @@ require "./test/test_helper"
 require "date"
 
 class SingleMerchantApiBusinessLogicTest < ApiTest
+  def test_a_null_message_when_merchant_doesnt_exist
+    id = rand(200_000..400_000)
+    favorite_customer = load_data("/api/v1/merchants/#{id}/favorite_customer")
+    pending_customers = load_data("/api/v1/merchants/#{id}/customers_with_pending_invoices")
+    revenue           = load_data("/api/v1/merchants/#{id}/revenue")
+
+    assert_equal "Merchant record #{id} not found", favorite_customer["error"]
+    assert_equal "Merchant record #{id} not found", pending_customers["error"]
+    assert_equal "Merchant record #{id} not found", revenue["error"]
+  end
+
   def test_loads_the_favorite_customer_associated_with_one_merchant
     merchant_id_one = 8
     merchant_id_two = 80
