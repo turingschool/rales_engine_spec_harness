@@ -17,6 +17,7 @@ class ItemApiRelationshipTest < ApiTest
     assert_equal 8, invoice_items.count
     invoice_items.each do |invoice_item|
       assert_equal 2015, invoice_item["item_id"]
+      assert_class_equal "invoice_item", invoice_item
     end
   end
 

@@ -35,7 +35,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 3, items.count
     items.each do |item|
       assert_equal invoice_merchant_id, item["merchant_id"]
-      assert_class_equal "item",       item
+      assert_class_equal "item",        item
     end
   end
 

@@ -32,9 +32,9 @@ class ItemsApiTest < ApiTest
 
     #item_id => [name, descirption, unit_price, merchant_id]
     items = {
-      404 => ["Item Porro Commodi", descriptions[0], "77484.0", 21],
-      1111 => ["Item Sapiente Et", descriptions[1], "8303.0", 50],
-      1812 => ["Item Velit Unde", descriptions[2], "22419.0", 74]
+      404 => ["Item Porro Commodi", descriptions[0], "774.84", 21],
+      1111 => ["Item Sapiente Et", descriptions[1], "83.03", 50],
+      1812 => ["Item Velit Unde", descriptions[2], "224.19", 74]
     }
     items.each do |id, (name, desc, unit_price, merch_id)|
       data = load_data("/api/v1/items/#{id}")
@@ -57,11 +57,11 @@ class ItemsApiTest < ApiTest
   # FINDERS
   # /find?query=parameters
 
-  def item_find(*args)
+  def item_find
     {"id"=>          1368,
      "name"=>        "Item Deserunt Dicta",
      "description"=> "Rem quos non dolores sit. Est facilis error ab adipisci consequuntur quo et. Vel error eos.",
-     "unit_price"=>  "27409.0",
+     "unit_price"=>  "274.09",
      "merchant_id"=> 59,
      "created_at"=>  "2012-03-27T14:54:05.000Z",
      "updated_at"=>  "2012-03-27T14:54:05.000Z"
@@ -94,19 +94,20 @@ class ItemsApiTest < ApiTest
 
   def test_it_can_find_first_instances_by_merchant_id
     by_merchant_id = load_data("/api/v1/items/find?merchant_id=#{item_find['merchant_id']}")
+    asc_first  = 1328
+    desc_first = 1370
 
-    assert_equal 1370, by_merchant_id['id']
+    assert_equal_to_either asc_first, desc_first, by_merchant_id['id']
   end
 
   def test_it_can_find_first_instances_by_time_values
     by_created_at = load_data("/api/v1/items/find?created_at=#{item_find['created_at']}")
     by_updated_at = load_data("/api/v1/items/find?updated_at=#{item_find['updated_at']}")
+    asc_first  = 1360
+    desc_first = 1597
 
-    assert_equal 1360, by_created_at['id']
-    assert_equal 1360, by_updated_at['id']
-
-    assert_equal "Item Blanditiis Deserunt", by_created_at['name']
-    assert_equal "Item Blanditiis Deserunt", by_updated_at['name']
+    assert_equal_to_either asc_first, desc_first, by_created_at['id']
+    assert_equal_to_either asc_first, desc_first, by_updated_at['id']
   end
 
 
@@ -117,7 +118,7 @@ class ItemsApiTest < ApiTest
     {"id"=>          937,
      "name"=>        "Item Et Placeat",
      "description"=> "Autem repudiandae qui nobis. Optio est rerum quam voluptas quos commodi repellendus. Vitae doloribus dignissimos.",
-     "unit_price"=>  "49121.0",
+     "unit_price"=>  "491.21",
      "merchant_id"=> 41,
      "created_at"=>  "2012-03-27T14:54:03.000Z",
      "updated_at"=>  "2012-03-27T14:54:03.000Z"
