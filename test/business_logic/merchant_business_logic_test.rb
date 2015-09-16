@@ -42,28 +42,28 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant_by_date
     merchant_id_one = 30
     merchant_id_two = 3
-    date_one        = Date.parse("2012-03-26").ctime
-    date_two        = Date.parse("2012-03-27").ctime
+    date_one        = DateTime.parse("2012-03-16 11:55:05")
+    date_two        = DateTime.parse("2012-03-07 10:54:55")
 
 
     revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")
     revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue?date=#{date_two}")
 
-    assert_equal ({"revenue" => "47424.45"}),   revenue_one
-    assert_equal ({"revenue" => "8116.35"}),    revenue_two
+    assert_equal ({"revenue" => "1518.84"}), revenue_one
+    assert_equal ({"revenue" => "3004.65"}), revenue_two
   end
 end
 
 class AllMerchantsApiBusinessLogicTest < ApiTest
   def test_loads_total_revenue_for_a_date_across_all_merchants
-    date_one = Date.parse("2012-03-27").ctime
-    date_two = Date.parse("2012-03-26").ctime
+    date_one = DateTime.parse("2012-03-16 11:55:05")
+    date_two = DateTime.parse("2012-03-07 10:54:55")
 
     total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")
     total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")
 
-    assert_equal ({"total_revenue" => "2718916.39"}), total_revenue_one
-    assert_equal ({"total_revenue" => "1908368.05"}), total_revenue_two
+    assert_equal ({"total_revenue" => "1518.84"}), total_revenue_one
+    assert_equal ({"total_revenue" => "3004.65"}), total_revenue_two
   end
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_revenue
