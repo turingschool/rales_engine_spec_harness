@@ -2,11 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
-    faraday (0.9.1)
-      multipart-post (>= 1.2, < 3)
+    hurley (0.2)
     method_source (0.8.2)
     minitest (5.7.0)
-    multipart-post (2.0.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -18,10 +16,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  faraday
+  hurley
   minitest
   pry
   rake
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

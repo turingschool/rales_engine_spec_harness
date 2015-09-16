@@ -142,9 +142,9 @@ class TransactionsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_created_at
-    by_created_at = load_data("/api/v1/transactions/find_all?created_at=#{transaction_find_all['created_at']}")
+    transactions = load_data("/api/v1/transactions/find_all?created_at=#{transaction_find_all['created_at']}")
 
-    assert_equal 29, by_created_at.count
+    assert_equal 29, transactions.count
 
     transaction_find_all.each do |attribute|
       assert_equal transaction_find_all[attribute], transactions.first[attribute]
@@ -152,9 +152,9 @@ class TransactionsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_updated_at
-    by_updated_at = load_data("/api/v1/transactions/find_all?updated_at=#{transaction_find_all['updated_at']}")
+    transactions = load_data("/api/v1/transactions/find_all?updated_at=#{transaction_find_all['updated_at']}")
 
-    assert_equal 29, by_updated_at.count
+    assert_equal 29, transactions.count
 
     transaction_find_all.each do |attribute|
       assert_equal transaction_find_all[attribute], transactions.first[attribute]
