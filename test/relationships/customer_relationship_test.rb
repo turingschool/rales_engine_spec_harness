@@ -1,14 +1,5 @@
 require "./test/test_helper"
 class CustomerApiRelationshipTest < ApiTest
-  def test_a_null_message_when_customer_doesnt_exist
-    id = rand(200_000..400_000)
-    invoices     = load_data("/api/v1/customers/#{id}/invoices")
-    transactions = load_data("/api/v1/customers/#{id}/transactions")
-
-      assert_equal "Customer record #{id} not found", invoices["error"]
-      assert_equal "Customer record #{id} not found", transactions["error"]
-  end
-
   def test_loads_a_collection_of_invoices_associated_with_one_customer
     customer_id = 309
     asc_id        = 1602

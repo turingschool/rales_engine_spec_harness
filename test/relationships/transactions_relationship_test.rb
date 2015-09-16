@@ -1,12 +1,5 @@
 require "./test/test_helper"
 class TransactionApiTest < ApiTest
-  def test_a_null_message_when_transaction_doesnt_exist
-    id = rand(200_000..400_000)
-    invoice = load_data("/api/v1/transactions/#{id}/invoice")
-
-    assert_equal "Transaction record #{id} not found", invoice["error"]
-  end
-
   def test_loads_the_associated_invoice
     transaction_id = 1031
 

@@ -1,20 +1,5 @@
 require "./test/test_helper"
 class InvoicesApiTest < ApiTest
-  def test_a_null_message_when_invoice_doesnt_exist
-    id = rand(200_000..400_000)
-    transactions  = load_data("/api/v1/invoices/#{id}/transactions")
-    items         = load_data("/api/v1/invoices/#{id}/items")
-    invoice_items = load_data("/api/v1/invoices/#{id}/invoice_items")
-    customer      = load_data("/api/v1/invoices/#{id}/customer")
-    merchant      = load_data("/api/v1/invoices/#{id}/merchant")
-
-    assert_equal "Invoice record #{id} not found", transactions["error"]
-    assert_equal "Invoice record #{id} not found", items["error"]
-    assert_equal "Invoice record #{id} not found", invoice_items["error"]
-    assert_equal "Invoice record #{id} not found", customer["error"]
-    assert_equal "Invoice record #{id} not found", merchant["error"]
-  end
-
   def test_loads_a_collection_of_transactions_associated_with_one_invoice
     invoice_id = rand(1..4845)
 

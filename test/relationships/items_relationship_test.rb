@@ -1,14 +1,5 @@
 require "./test/test_helper"
 class ItemApiRelationshipTest < ApiTest
-  def test_a_null_message_when_item_doesnt_exist
-    id = rand(200_000..400_000)
-    invoice_items = load_data("/api/v1/items/#{id}/invoice_items")
-    merchant      = load_data("/api/v1/items/#{id}/merchant")
-
-    assert_equal "Item record #{id} not found", invoice_items["error"]
-    assert_equal "Item record #{id} not found", merchant["error"]
-  end
-
   def test_loads_a_collection_of_invoice_items_associated_with_one_item
     id = 2015
 

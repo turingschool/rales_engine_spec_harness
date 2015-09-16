@@ -1,14 +1,5 @@
 require "./test/test_helper"
 class MerchantsApiTest < ApiTest
-  def test_a_null_message_when_merchant_doesnt_exist
-    id = rand(200_000..400_000)
-    items    = load_data("/api/v1/merchants/#{id}/items")
-    invoices = load_data("/api/v1/merchants/#{id}/invoices")
-
-    assert_equal "Merchant record #{id} not found", items["error"]
-    assert_equal "Merchant record #{id} not found", invoices["error"]
-  end
-
   def test_loads_a_collection_of_items_associated_with_one_merchant
     merchant_id = 99
     asc_first  = 2397

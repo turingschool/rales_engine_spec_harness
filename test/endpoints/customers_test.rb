@@ -20,11 +20,12 @@ class CustomerApiTest < ApiTest
   end
 
   def customer_germaine
-    {"id"=>         479,
-     "first_name"=> "Germaine",
-     "last_name"=>  "Kirlin",
-     "created_at"=> "2012-03-27T14:56:04.000Z",
-     "updated_at"=> "2012-03-27T14:56:04.000Z"
+    {
+      "id"         => 479,
+      "first_name" => "Germaine",
+      "last_name"  => "Kirlin",
+      "created_at" => "2012-03-27T14:56:04.000Z",
+      "updated_at" => "2012-03-27T14:56:04.000Z"
     }
   end
 
@@ -44,7 +45,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_last_name
-    by_last_name = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}")
+    by_last_name = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")
 
     assert_hash_equal customer_germaine, by_last_name
   end
