@@ -2,7 +2,7 @@ require "./test/test_helper"
 
 class CustomerApiTest < ApiTest
   def test_a_null_message_when_customer_params_doesnt_exist
-    id = rand(200_000..400_000)
+   id = rand(200_000..400_000)
     nulls = []
     nulls << one_id         = load_data("/api/v1/customers/#{id}")
     nulls << all_id         = load_data("/api/v1/customers/find_all?id=#{id}")
@@ -71,9 +71,11 @@ class CustomerApiTest < ApiTest
   def test_it_can_find_first_instance_by_time_values
     by_created_at = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")
     by_updated_at = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")
+    asc_first  = 477
+    desc_first = 481
 
-    assert_hash_equal customer_germaine, by_created_at
-    assert_hash_equal customer_germaine, by_updated_at
+    assert_equal_to_either asc_first, desc_first, by_created_at["id"]
+    assert_equal_to_either asc_first, desc_first, by_updated_at["id"]
   end
 
 

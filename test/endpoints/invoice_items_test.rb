@@ -25,9 +25,9 @@ class InvoiceItemsApiTest < ApiTest
   end
   def test_loads_individual_invoice_items
     #invoice_item_id => [item_id, invoice_id, quantity, unit_price]
-    invoice_items = {10110 => [1223, 2277, 9, "21916.0"],
-                     18191 => [610, 4063, 5, "57645.0"],
-                     21533 => [543, 4807, 4, "6056.0"]
+    invoice_items = {10110 => [1223, 2277, 9, "219.16"],
+                     18191 => [610, 4063, 5, "576.45"],
+                     21533 => [543, 4807, 4, "60.56"]
     }
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
@@ -55,7 +55,7 @@ class InvoiceItemsApiTest < ApiTest
      "item_id"=>     574,
      "invoice_id"=>  4477,
      "quantity"=>    2,
-     "unit_price"=>  "83363.0",
+     "unit_price"=>  "833.63",
      "created_at"=> "2012-03-27T14:57:57.000Z",
      "updated_at"=> "2012-03-27T14:57:57.000Z"
     }
@@ -117,7 +117,7 @@ class InvoiceItemsApiTest < ApiTest
      "item_id"=>    574,
      "invoice_id"=> 4477,
      "quantity"=>   2,
-     "unit_price"=> "83363.0",
+     "unit_price"=> "833.63",
      "created_at"=> "2012-03-27T14:57:57.000Z",
      "updated_at"=> "2012-03-27T14:57:57.000Z"
     }
