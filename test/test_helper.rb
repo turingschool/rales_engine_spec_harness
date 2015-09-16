@@ -1,7 +1,7 @@
 require "minitest"
 require "minitest/autorun"
 require "minitest/pride"
-require "hurley"
+require "faraday"
 require "json"
 require "pry"
 require "./test/custom_assertions"
@@ -14,12 +14,12 @@ class ApiTest < Minitest::Test
   end
 
   def connection
-    @connection ||= Hurley::Client.new(base_url)
+    @connection ||= Faraday.new(url: base_url)
   end
 
   def load_data(path)
     response = connection.get(path)
-    assert_equal 200, response.status_code, "Expected status code 200, but got status code #{response.status_code}. Does the endpoint exist?"
+    assert_equal 200, response.status, "Expected status code 200, but got status code #{response.status}. Does the endpoint exist?"
     assert_valid_json(response.body)
   end
 end
