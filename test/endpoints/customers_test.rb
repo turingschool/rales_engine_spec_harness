@@ -19,46 +19,44 @@ class CustomerApiTest < ApiTest
     end
   end
 
-  def customer_shayne
-    {"id"=>         75,
-     "first_name"=> "Shayne",
+  def customer_germaine
+    {"id"=>         479,
+     "first_name"=> "Germaine",
      "last_name"=>  "Kirlin",
-     "created_at"=> "2012-03-27T14:54:27.000Z",
-     "updated_at"=> "2012-03-27T14:54:27.000Z"
+     "created_at"=> "2012-03-27T14:56:04.000Z",
+     "updated_at"=> "2012-03-27T14:56:04.000Z"
     }
-  end
-
-  def full_name_shayne
-    "Shayne Kirlin"
   end
 
   # FINDERS
   # /find?query=parameters
 
   def test_it_can_find_first_instance_by_id
-    by_id = load_data("/api/v1/customers/find?id=#{customer_shayne['id']}")
+    by_id = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")
 
-    assert_hash_equal customer_shayne, by_id
+    assert_hash_equal customer_germaine, by_id
   end
 
   def test_it_can_find_first_instance_by_first_name
-    by_first_name = load_data("/api/v1/customers/find?first_name=#{customer_shayne['first_name']}")
+    by_first_name = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")
 
-    assert_hash_equal customer_shayne, by_first_name
+    assert_hash_equal customer_germaine, by_first_name
   end
 
   def test_it_can_find_first_instance_by_last_name
-    by_last_name = load_data("/api/v1/customers/find?last_name=#{customer_shayne['last_name']}")
+    by_last_name = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}")
 
-    assert_hash_equal customer_shayne, by_last_name
+    assert_hash_equal customer_germaine, by_last_name
   end
 
   def test_it_can_find_first_instance_by_time_values
-    by_created_at = load_data("/api/v1/customers/find?created_at=#{customer_shayne['created_at']}")
-    by_updated_at = load_data("/api/v1/customers/find?updated_at=#{customer_shayne['updated_at']}")
+    by_created_at = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")
+    by_updated_at = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")
+    asc_first  = 477
+    desc_first = 481
 
-    assert_hash_equal customer_shayne, by_created_at
-    assert_hash_equal customer_shayne, by_updated_at
+    assert_equal_to_either asc_first, desc_first, by_created_at["id"]
+    assert_equal_to_either asc_first, desc_first, by_updated_at["id"]
   end
 
 

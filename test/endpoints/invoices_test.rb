@@ -46,14 +46,18 @@ class InvoicesApiTest < ApiTest
 
   def test_it_can_find_first_instances_by_merchant_id
     by_merchant_id = load_data("/api/v1/invoices/find?merchant_id=#{invoice_find['merchant_id']}")
+    asc_first  = 51
+    desc_first = 4751
 
-    assert_equal 51, by_merchant_id['id']
+    assert_equal_to_either asc_first, desc_first, by_merchant_id['id']
   end
 
   def test_it_can_find_first_instances_by_status
     by_status = load_data("/api/v1/invoices/find?status=#{invoice_find['status']}")
+    asc_first  = 1
+    desc_first = 4843
 
-    assert_equal 1, by_status['id']
+    assert_equal_to_either asc_first, desc_first, by_status['id']
   end
 
   def test_it_can_find_first_instances_by_times_values
@@ -96,9 +100,11 @@ class InvoicesApiTest < ApiTest
 
   def test_it_can_find_all_instances_by_merchant_id
     by_merchant_id = load_data("/api/v1/invoices/find_all?merchant_id=#{invoice_find_all['merchant_id']}")
+    asc_first  = 66
+    desc_first = 4833
 
     assert_equal 51,                     by_merchant_id.count
-    assert_equal 66,                     by_merchant_id.first['id']
+    assert_equal_to_either asc_first,    desc_first, by_merchant_id.first['id']
     assert_one_in_list invoice_find_all, by_merchant_id
   end
 

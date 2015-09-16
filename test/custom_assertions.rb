@@ -20,8 +20,12 @@ module CustomAssertions
 
   def assert_one_in_list(entity, list)
     elem_in_list = list.one? {|ele| ele == entity}
+    message = "One and only one instance of entity should appear in list"
+    if list.none? {|ele| ele == entity}
+      message = "One element should be in list, currently none are."
+    end
 
-    assert elem_in_list, "One and only one instance of entity should appear in list"
+    assert elem_in_list, message
   end
 
   def assert_hash_equal(object, entity)
@@ -35,5 +39,9 @@ module CustomAssertions
       e.has_value?(attr)
     end
     assert result, "#{attr} not found in collection"
+  end
+
+  def assert_equal_to_either(asc, desc, actual)
+    assert asc == actual || desc == actual, "#{actual} should be either #{asc} or #{desc}"
   end
 end

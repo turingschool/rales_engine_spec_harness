@@ -57,16 +57,20 @@ class TransactionsApiTest < ApiTest
 
   def test_it_can_find_first_instance_by_result
     by_result = load_data("/api/v1/transactions/find?result=#{transaction_find['result']}")
+    asc_first  = 1
+    desc_first = 5595
 
-    assert_equal 1, by_result['id']
+    assert_equal_to_either asc_first, desc_first, by_result['id']
   end
 
   def test_it_can_find_first_instance_by_time_values
     by_created_at = load_data("/api/v1/transactions/find?created_at=#{transaction_find['created_at']}")
     by_updated_at = load_data("/api/v1/transactions/find?updated_at=#{transaction_find['updated_at']}")
+    asc_first  = 3595
+    desc_first = 3612
 
-    assert_equal 3595, by_created_at['id']
-    assert_equal 3595, by_updated_at['id']
+    assert_equal_to_either asc_first, desc_first, by_created_at['id']
+    assert_equal_to_either asc_first, desc_first, by_updated_at['id']
   end
 
 

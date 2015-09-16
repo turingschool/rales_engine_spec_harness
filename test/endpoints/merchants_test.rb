@@ -31,26 +31,30 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_id
-  by_id = load_data("/api/v1/merchants/find?id=#{merchant_kwd['id']}")
+    by_id = load_data("/api/v1/merchants/find?id=#{merchant_kwd['id']}")
 
-  assert_hash_equal merchant_kwd, by_id
+    assert_hash_equal merchant_kwd, by_id
   end
 
   def test_it_can_find_first_instance_by_name
-  by_name = load_data("/api/v1/merchants/find?name=#{merchant_kwd['name']}")
+    by_name = load_data("/api/v1/merchants/find?name=#{merchant_kwd['name']}")
 
-  assert_hash_equal merchant_kwd, by_name
+    assert_hash_equal merchant_kwd, by_name
   end
 
   def test_it_can_find_first_instance_by_time_values
-  by_created_at = load_data("/api/v1/merchants/find?created_at=#{merchant_kwd['created_at']}")
-  by_updated_at = load_data("/api/v1/merchants/find?updated_at=#{merchant_kwd['updated_at']}")
+    by_created_at = load_data("/api/v1/merchants/find?created_at=#{merchant_kwd['created_at']}")
+    by_updated_at = load_data("/api/v1/merchants/find?updated_at=#{merchant_kwd['updated_at']}")
+    asc_first  = 60
+    desc_first = 66
 
-  assert_equal 60, by_created_at['id']
-  assert_equal 60, by_updated_at['id']
+    assert_equal_to_either asc_first, desc_first, by_created_at['id']
+    assert_equal_to_either asc_first, desc_first, by_updated_at['id']
+    asc_first  = "Smitham LLC"
+    desc_first = "Bechtelar LLC"
 
-  assert_equal "Smitham LLC", by_created_at['name']
-  assert_equal "Smitham LLC", by_updated_at['name']
+    assert_equal_to_either asc_first, desc_first, by_created_at['name']
+    assert_equal_to_either asc_first, desc_first, by_updated_at['name']
   end
 
 
