@@ -42,8 +42,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant_by_date
     merchant_id_one = 30
     merchant_id_two = 3
-    date_one        = DateTime.parse("2012-03-16 11:55:05")
-    date_two        = DateTime.parse("2012-03-07 10:54:55")
+    date_one        = "2012-03-16 11:55:05"
+    date_two        = "2012-03-07 10:54:55"
 
 
     revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")
@@ -56,8 +56,8 @@ end
 
 class AllMerchantsApiBusinessLogicTest < ApiTest
   def test_loads_total_revenue_for_a_date_across_all_merchants
-    date_one = DateTime.parse("2012-03-16 11:55:05")
-    date_two = DateTime.parse("2012-03-07 10:54:55")
+    date_one = "2012-03-16 11:55:05"
+    date_two = "2012-03-07 10:54:55"
 
     total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")
     total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")
