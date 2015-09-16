@@ -6,8 +6,8 @@ class ItemApiBusinessLogicTest < ApiTest
     best_day_one = load_data("/api/v1/items/#{item_id_one}/best_day")
     best_day_two = load_data("/api/v1/items/#{item_id_two}/best_day")
 
-    assert_equal "Fri Mar 23 10:55:29 2012", best_day_one
-    assert_equal "Sun Mar 18 23:57:05 2012", best_day_two
+    assert_equal DateTime.parse("Fri Mar 23 10:55:29 2012"), DateTime.parse(best_day_one)
+    assert_equal DateTime.parse("Sun Mar 18 23:57:05 2012"), DateTime.parse(best_day_two)
   end
 
   def test_loads_a_variable_number_of_top_items_ranked_by_total_number_sold
