@@ -3,7 +3,12 @@ require "./test/test_helper"
 class InvoicesApiTest < ApiTest
   def test_loads_individual_invoices
     #invoice_id => [customer_id, merchant_id]
-    invoices = {117 => [22, 84], 1337 => [262, 78], 4815 => [993, 77]}
+    invoices = {
+      117  => [22,  84],
+      1337 => [262, 78],
+      4815 => [993, 77]
+    }
+
     invoices.each do |id, (cust_id, merch_id)|
       data = load_data("/api/v1/invoices/#{id}")
       assert_equal cust_id,  data["customer_id"]
@@ -23,106 +28,135 @@ class InvoicesApiTest < ApiTest
   # /find?query=parameters
 
   def invoice_find
-    {"id"=>          3811,
-     "customer_id"=> 782,
-     "merchant_id"=> 51,
-     "status"=>     "shipped",
-     "created_at"=> "2012-03-09T08:57:21.000Z",
-     "updated_at"=> "2012-03-09T08:57:21.000Z"
+    {
+      "id"          => 3811,
+      "customer_id" => 782,
+      "merchant_id" => 51,
+      "status"      => "shipped",
+      "created_at"  => "2012-03-09T08:57:21.000Z",
+      "updated_at"  => "2012-03-09T08:57:21.000Z"
     }
   end
 
   def test_it_can_find_first_instances_by_id
-    by_id = load_data("/api/v1/invoices/find?id=#{invoice_find['id']}")
+    invoice = load_data("/api/v1/invoices/find?id=#{invoice_find['id']}")
 
-    assert_hash_equal invoice_find, by_id
+    invoice_find.each do |attribute|
+      assert_equal invoice_find[attribute], invoice[attribute]
+    end
   end
 
   def test_it_can_find_first_instances_by_customer_id
-    by_customer_id = load_data("/api/v1/invoices/find?customer_id=#{invoice_find['customer_id']}")
+    invoice = load_data("/api/v1/invoices/find?customer_id=#{invoice_find['customer_id']}")
 
-    assert_hash_equal invoice_find, by_customer_id
+    invoice_find.each do |attribute|
+      assert_equal invoice_find[attribute], invoice[attribute]
+    end
   end
 
   def test_it_can_find_first_instances_by_merchant_id
-    by_merchant_id = load_data("/api/v1/invoices/find?merchant_id=#{invoice_find['merchant_id']}")
+    invoice = load_data("/api/v1/invoices/find?merchant_id=#{invoice_find['merchant_id']}")
     asc_first  = 51
     desc_first = 4751
 
-    assert_equal_to_either asc_first, desc_first, by_merchant_id['id']
+    assert_equal_to_either asc_first, desc_first, invoice['id']
   end
 
   def test_it_can_find_first_instances_by_status
-    by_status = load_data("/api/v1/invoices/find?status=#{invoice_find['status']}")
+    invoice = load_data("/api/v1/invoices/find?status=#{invoice_find['status']}")
     asc_first  = 1
     desc_first = 4843
 
-    assert_equal_to_either asc_first, desc_first, by_status['id']
+    assert_equal_to_either asc_first, desc_first, invoice['id']
   end
 
-  def test_it_can_find_first_instances_by_times_values
-    by_created_at = load_data("/api/v1/invoices/find?created_at=#{invoice_find['created_at']}")
-    by_updated_at = load_data("/api/v1/invoices/find?updated_at=#{invoice_find['updated_at']}")
+  def test_it_can_find_first_instances_by_created_at
+    invoice = load_data("/api/v1/invoices/find?created_at=#{invoice_find['created_at']}")
 
-    assert_hash_equal invoice_find, by_created_at
-    assert_hash_equal invoice_find, by_updated_at
+    invoice_find.each do |attribute|
+      assert_equal invoice_find[attribute], invoice[attribute]
+    end
   end
 
+  def test_it_can_find_first_instances_by_updated_at
+    invoice = load_data("/api/v1/invoices/find?updated_at=#{invoice_find['updated_at']}")
+
+    invoice_find.each do |attribute|
+      assert_equal invoice_find[attribute], invoice[attribute]
+    end
+  end
 
   # FINDERS
   # /find_all?query=parameters
 
   def invoice_find_all
-    {"id"=>          441,
-     "customer_id"=> 91,
-     "merchant_id"=> 59,
-     "status"=>     "shipped",
-     "created_at"=> "2012-03-06T16:54:31.000Z",
-     "updated_at"=> "2012-03-06T16:54:31.000Z"
+    {
+      "id"          => 441,
+      "customer_id" => 91,
+      "merchant_id" => 59,
+      "status"      => "shipped",
+      "created_at"  => "2012-03-06T16:54:31.000Z",
+      "updated_at"  => "2012-03-06T16:54:31.000Z"
     }
 
   end
 
   def test_it_can_find_all_instances_by_id
-    by_id = load_data("/api/v1/invoices/find_all?id=#{invoice_find_all['id']}")
+    invoices = load_data("/api/v1/invoices/find_all?id=#{invoice_find_all['id']}")
 
-    assert_equal 1,                      by_id.count
-    assert_equal invoice_find_all,       by_id.first
-    assert_one_in_list invoice_find_all, by_id
+    assert_equal 1, invoices.count
+
+    invoice_find_all.each do |attribute|
+      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+    end
   end
 
   def test_it_can_find_all_instances_by_customer_id
-    by_customer_id = load_data("/api/v1/invoices/find_all?customer_id=#{invoice_find_all['customer_id']}")
+    invoices = load_data("/api/v1/invoices/find_all?customer_id=#{invoice_find_all['customer_id']}")
 
-    assert_equal 4,                      by_customer_id.count
-    assert_one_in_list invoice_find_all, by_customer_id
+    assert_equal 4, invoices.count
+
+    invoice_find_all.each do |attribute|
+      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+    end
   end
 
   def test_it_can_find_all_instances_by_merchant_id
-    by_merchant_id = load_data("/api/v1/invoices/find_all?merchant_id=#{invoice_find_all['merchant_id']}")
+    invoices = load_data("/api/v1/invoices/find_all?merchant_id=#{invoice_find_all['merchant_id']}")
     asc_first  = 66
     desc_first = 4833
 
-    assert_equal 51,                     by_merchant_id.count
-    assert_equal_to_either asc_first,    desc_first, by_merchant_id.first['id']
-    assert_one_in_list invoice_find_all, by_merchant_id
+    assert_equal 51, invoices.count
+    assert_equal_to_either asc_first, desc_first, invoices.first['id']
   end
 
   def test_it_can_find_all_instances_by_status
-    by_status = load_data("/api/v1/invoices/find_all?status=#{invoice_find_all['status']}")
+    invoices = load_data("/api/v1/invoices/find_all?status=#{invoice_find_all['status']}")
 
-    assert_equal 4843,                   by_status.count
-    assert_one_in_list invoice_find_all, by_status
+    assert_equal 4843, invoices.count
+
+    invoice_find_all.each do |attribute|
+      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+    end
   end
 
-  def test_it_can_find_all_instances_by_time_values
-    by_created_at = load_data("/api/v1/invoices/find_all?created_at=#{invoice_find_all['created_at']}")
-    by_updated_at = load_data("/api/v1/invoices/find_all?updated_at=#{invoice_find_all['updated_at']}")
+  def test_it_can_find_all_instances_by_created_at
+    invoices = load_data("/api/v1/invoices/find_all?created_at=#{invoice_find_all['created_at']}")
 
-    assert_equal 1, by_created_at.count
-    assert_equal 1, by_updated_at.count
+    assert_equal 1, invoices.count
 
-    assert_one_in_list invoice_find_all, by_created_at
-    assert_one_in_list invoice_find_all, by_updated_at
+    invoice_find_all.each do |attribute|
+      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+    end
+  end
+
+  def test_it_can_find_all_instances_by_updated_at
+    invoices = load_data("/api/v1/invoices/find_all?updated_at=#{invoice_find_all['updated_at']}")
+
+    assert_equal 1, invoices.count
+
+    invoice_find_all.each do |attribute|
+      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+    end
   end
 end
