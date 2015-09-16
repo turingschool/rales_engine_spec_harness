@@ -47,7 +47,7 @@ class ItemsApiTest < ApiTest
     }
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instance_by_id
     item = load_data("/api/v1/items/find?id=#{item_find['id']}")
 
     item_find.each do |attribute|
@@ -55,7 +55,7 @@ class ItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_name
+  def test_it_can_find_first_instance_by_name
     item = load_data("/api/v1/items/find?name=#{item_find['name']}")
 
     item_find.each do |attribute|
@@ -63,7 +63,7 @@ class ItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_description
+  def test_it_can_find_first_instance_by_description
     item = load_data("/api/v1/items/find?description=#{item_find['description']}")
 
     item_find.each do |attribute|
@@ -71,7 +71,7 @@ class ItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_unit_price
+  def test_it_can_find_first_instance_by_unit_price
     item = load_data("/api/v1/items/find?unit_price=#{item_find['unit_price']}")
 
     item_find.each do |attribute|
@@ -79,7 +79,7 @@ class ItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_merchant_id
+  def test_it_can_find_first_instance_by_merchant_id
     item = load_data("/api/v1/items/find?merchant_id=#{item_find['merchant_id']}")
     asc_first  = 1328
     desc_first = 1370
@@ -87,7 +87,7 @@ class ItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, item['id']
   end
 
-  def test_it_can_find_first_instances_by_created_at
+  def test_it_can_find_first_instance_by_created_at
     item = load_data("/api/v1/items/find?created_at=#{item_find['created_at']}")
     asc_first  = 1360
     desc_first = 1597
@@ -95,7 +95,7 @@ class ItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, item['id']
   end
 
-  def test_it_can_find_first_instances_by_updated_at
+  def test_it_can_find_first_instance_by_updated_at
     item = load_data("/api/v1/items/find?updated_at=#{item_find['updated_at']}")
     asc_first  = 1360
     desc_first = 1597

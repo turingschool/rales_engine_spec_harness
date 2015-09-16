@@ -41,7 +41,7 @@ class InvoiceItemsApiTest < ApiTest
     }
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instance_by_id
     invoice_item = load_data("/api/v1/invoice_items/find?id=#{invoice_find['id']}")
 
     invoice_find.each do |attribute|
@@ -49,7 +49,7 @@ class InvoiceItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_item_id
+  def test_it_can_find_first_instance_by_item_id
     invoice_item = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")
     asc_first  = 2549
     desc_first = 20097
@@ -57,7 +57,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
   end
 
-  def test_it_can_find_first_instances_by_invoice_id
+  def test_it_can_find_first_instance_by_invoice_id
     invoice_item = load_data("/api/v1/invoice_items/find?invoice_id=#{invoice_find['invoice_id']}")
     asc_first  = 20093
     desc_first = 20098
@@ -65,7 +65,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
   end
 
-  def test_it_can_find_first_instances_by_quantity
+  def test_it_can_find_first_instance_by_quantity
     invoice_item = load_data("/api/v1/invoice_items/find?quantity=#{invoice_find['quantity']}")
     asc_first  = 21
     desc_first = 21662
@@ -73,7 +73,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
   end
 
-  def test_it_can_find_first_instances_by_unit_price
+  def test_it_can_find_first_instance_by_unit_price
     invoice_item = load_data("/api/v1/invoice_items/find?unit_price=#{invoice_find['unit_price']}")
     asc_first  = 822
     desc_first = 20097
@@ -81,7 +81,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
   end
 
-  def test_it_can_find_first_instances_by_created_at
+  def test_it_can_find_first_instance_by_created_at
     invoice_item = load_data("/api/v1/invoice_items/find?created_at=#{invoice_find['created_at']}")
     asc_first = 20062
     desc_first = 20147
@@ -89,7 +89,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
   end
 
-  def test_it_can_find_first_instances_by_updated_at
+  def test_it_can_find_first_instance_by_updated_at
     invoice_item = load_data("/api/v1/invoice_items/find?updated_at=#{invoice_find['updated_at']}")
     asc_first = 20062
     desc_first = 20147

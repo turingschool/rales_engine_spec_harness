@@ -38,7 +38,7 @@ class InvoicesApiTest < ApiTest
     }
   end
 
-  def test_it_can_find_first_instances_by_id
+  def test_it_can_find_first_instance_by_id
     invoice = load_data("/api/v1/invoices/find?id=#{invoice_find['id']}")
 
     invoice_find.each do |attribute|
@@ -46,7 +46,7 @@ class InvoicesApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_customer_id
+  def test_it_can_find_first_instance_by_customer_id
     invoice = load_data("/api/v1/invoices/find?customer_id=#{invoice_find['customer_id']}")
 
     invoice_find.each do |attribute|
@@ -54,7 +54,7 @@ class InvoicesApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_merchant_id
+  def test_it_can_find_first_instance_by_merchant_id
     invoice = load_data("/api/v1/invoices/find?merchant_id=#{invoice_find['merchant_id']}")
     asc_first  = 51
     desc_first = 4751
@@ -62,7 +62,7 @@ class InvoicesApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice['id']
   end
 
-  def test_it_can_find_first_instances_by_status
+  def test_it_can_find_first_instance_by_status
     invoice = load_data("/api/v1/invoices/find?status=#{invoice_find['status']}")
     asc_first  = 1
     desc_first = 4843
@@ -70,7 +70,7 @@ class InvoicesApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, invoice['id']
   end
 
-  def test_it_can_find_first_instances_by_created_at
+  def test_it_can_find_first_instance_by_created_at
     invoice = load_data("/api/v1/invoices/find?created_at=#{invoice_find['created_at']}")
 
     invoice_find.each do |attribute|
@@ -78,7 +78,7 @@ class InvoicesApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_updated_at
+  def test_it_can_find_first_instance_by_updated_at
     invoice = load_data("/api/v1/invoices/find?updated_at=#{invoice_find['updated_at']}")
 
     invoice_find.each do |attribute|

@@ -61,7 +61,7 @@ class CustomerApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_first_instances_by_created_at
+  def test_it_can_find_first_instance_by_created_at
     customer = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")
     asc_first  = 477
     desc_first = 481
@@ -69,7 +69,7 @@ class CustomerApiTest < ApiTest
     assert_equal_to_either asc_first, desc_first, customer["id"]
   end
 
-  def test_it_can_find_first_instances_by_updated_at
+  def test_it_can_find_first_instance_by_updated_at
     customer = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")
     asc_first  = 477
     desc_first = 481
