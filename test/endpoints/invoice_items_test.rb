@@ -51,7 +51,7 @@ class InvoiceItemsApiTest < ApiTest
 
   def test_it_can_find_first_instance_by_item_id
     invoice_item = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")
-    asc_first  = 2549
+    asc_first  = 5822
     desc_first = 20097
 
     assert_equal_to_either asc_first, desc_first, invoice_item['id']
