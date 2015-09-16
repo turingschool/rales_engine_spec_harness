@@ -4,9 +4,9 @@ class CustomerApiTest < ApiTest
   def test_loads_individual_customers
     #customer_id => [first_name, last_name]
     customers = {
-      15  => ["Magnus", "Sipes"],
+      15  => ["Magnus",   "Sipes"],
       305 => ["Vivienne", "Kunze"],
-      968 => ["Norma", "Sipes"]
+      968 => ["Norma",    "Sipes"]
     }
 
     customers.each do |id, (first_name, last_name)|
