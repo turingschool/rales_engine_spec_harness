@@ -14,16 +14,16 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
   end
 
   def test_loads_the_customers_with_pending_invoices_associated_with_one_merchant
-    merchant_id_one = 17
-    merchant_id_two = 77
+    merchant_id_one = 3
+    merchant_id_two = 4
 
     pending_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/customers_with_pending_invoices")
     pending_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/customers_with_pending_invoices")
 
-    assert_equal 3,   pending_customer_one.size
-    assert_equal 5,   pending_customer_two.size
-    assert_response_has_attribute 197, pending_customer_one
-    assert_response_has_attribute 28,  pending_customer_two
+    assert_equal 4,   pending_customer_one.size
+    assert_equal 2,   pending_customer_two.size
+    assert_response_has_attribute 683, pending_customer_one
+    assert_response_has_attribute 481,  pending_customer_two
   end
 
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant
