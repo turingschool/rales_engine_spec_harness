@@ -43,7 +43,7 @@ class TransactionsApiTest < ApiTest
     transaction = load_data("/api/v1/transactions/find?id=#{transaction_find['id']}")
 
     transaction_find.each do |attribute|
-      assert_equal transaction[attribute], transaction[attribute]
+      assert_equal transaction_find[attribute], transaction[attribute]
     end
   end
 
@@ -51,7 +51,7 @@ class TransactionsApiTest < ApiTest
     transaction = load_data("/api/v1/transactions/find?invoice_id=#{transaction_find['invoice_id']}")
 
     transaction_find.each do |attribute|
-      assert_equal transaction[attribute], transaction[attribute]
+      assert_equal transaction_find[attribute], transaction[attribute]
     end
   end
 
@@ -59,7 +59,7 @@ class TransactionsApiTest < ApiTest
     transaction = load_data("/api/v1/transactions/find?credit_card_number=#{transaction_find['credit_card_number']}")
 
     transaction_find.each do |attribute|
-      assert_equal transaction[attribute], transaction[attribute]
+      assert_equal transaction_find[attribute], transaction[attribute]
     end
   end
 
