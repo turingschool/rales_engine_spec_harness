@@ -54,6 +54,7 @@ end
 
 class AllMerchantsApiBusinessLogicTest < ApiTest
   def test_loads_total_revenue_for_a_date_across_all_merchants
+    skip("Assertion is the same as for a single merchant above.")
     date_one = "2012-03-16 11:55:05"
     date_two = "2012-03-07 10:54:55"
 
