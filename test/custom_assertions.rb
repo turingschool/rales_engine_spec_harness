@@ -7,12 +7,12 @@ module CustomAssertions
 
   def assert_class_equal(object, entity)
     schema = {
-      "transaction"  => ["created_at", "id", "invoice_id", "credit_card_number", "result", "updated_at"],
-      "merchant"     => ["created_at", "id", "name", "updated_at"],
-      "customer"     => ["created_at", "id", "first_name", "last_name", "updated_at"],
-      "invoice"      => ["created_at", "id", "customer_id", "merchant_id", "status", "updated_at"],
-      "invoice_item" => ["created_at", "id", "item_id", "invoice_id", "quantity", "unit_price", "updated_at"],
-      "item"         => ["created_at", "id", "name", "description", "unit_price", "merchant_id", "updated_at"]
+      "transaction"  => ["id", "invoice_id", "credit_card_number", "result"],
+      "merchant"     => ["id", "name"],
+      "customer"     => ["id", "first_name", "last_name"],
+      "invoice"      => ["id", "customer_id", "merchant_id", "status"],
+      "invoice_item" => ["id", "item_id", "invoice_id", "quantity", "unit_price"],
+      "item"         => ["id", "name", "description", "unit_price", "merchant_id"]
     }
 
     assert_equal schema[object].sort, entity.keys.sort
