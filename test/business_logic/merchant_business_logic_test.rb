@@ -24,6 +24,14 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     assert_equal 5,   pending_customer_two.size
     assert_response_has_attribute 197, pending_customer_one
     assert_response_has_attribute 28,  pending_customer_two
+    assert_response_has_attribute 'Cara',  pending_customer_one
+    assert_response_has_attribute 'Koss',  pending_customer_one
+    assert_response_has_attribute 'Dereck',  pending_customer_one
+    assert_response_has_attribute 'Little',  pending_customer_two
+    assert_response_has_attribute 'Caterina',  pending_customer_two
+    assert_response_has_attribute 'Cormier',  pending_customer_two
+    assert_response_has_attribute 'Emmerich',  pending_customer_two
+    assert_response_has_attribute 'MacGyver',  pending_customer_two
   end
 
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant
