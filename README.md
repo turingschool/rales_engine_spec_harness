@@ -2,7 +2,7 @@
 
 This gem contains an http-based spec harness for validating
 functionality on student implementations of the 
-[RalesEngine](https://github.com/JumpstartLab/curriculum/blob/master/source/projects/rales_engine.markdown)
+[RalesEngine](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/rails_engine.md)
 project at Turing.
 
 ## Installation
