@@ -2,7 +2,7 @@ module CustomAssertions
   def assert_valid_json(json)
     JSON.parse(json, quirks_mode: true)
   rescue JSON::ParserError
-    flunk("Expected #{data} to be valid JSON.")
+    flunk("Expected #{json} to be valid JSON.")
   end
 
   def assert_class_equal(object, entity)
