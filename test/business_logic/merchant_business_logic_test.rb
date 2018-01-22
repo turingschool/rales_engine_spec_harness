@@ -42,8 +42,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant_by_date
     merchant_id_one = 30
     merchant_id_two = 3
-    date_one        = "2012-03-16 11:55:05"
-    date_two        = "2012-03-07 10:54:55"
+    date_one        = "2012-03-16"
+    date_two        = "2012-03-07"
 
 
     revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")
