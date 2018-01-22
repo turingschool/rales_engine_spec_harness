@@ -62,8 +62,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
     total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")
     total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")
 
-    assert_equal ({"total_revenue" => "1518.84"}), total_revenue_one
-    assert_equal ({"total_revenue" => "3004.65"}), total_revenue_two
+    assert_equal ({"total_revenue" => "2495397.37"}), total_revenue_one
+    assert_equal ({"total_revenue" => "2705630.42"}), total_revenue_two
   end
 
   def test_loads_a_variable_number_of_top_merchants_ranked_by_total_revenue
