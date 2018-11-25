@@ -10,14 +10,14 @@ class CustomerApiTest < ApiTest
     }
 
     customers.each do |id, (first_name, last_name)|
-      data = load_data("/api/v1/customers/#{id}")
+      data = load_data("/api/v1/customers/#{id}")["data"]
       assert_equal first_name, data["first_name"]
       assert_equal last_name,  data["last_name"]
     end
   end
 
   def test_loads_all_customers
-    customers = load_data("/api/v1/customers")
+    customers = load_data("/api/v1/customers")["data"]
     assert_equal 1000, customers.count
     customers.each do |customer|
       assert_class_equal "customer", customer
@@ -38,7 +38,7 @@ class CustomerApiTest < ApiTest
   # /find?query=parameters
 
   def test_it_can_find_first_instance_by_id
-    customer = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")
+    customer = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")["data"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -46,7 +46,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_first_name
-    customer = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")
+    customer = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")["data"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -54,7 +54,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_last_name
-    customer = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")
+    customer = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")["data"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -62,7 +62,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_created_at
-    customer = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")
+    customer = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")["data"]
     asc_first  = 477
     desc_first = 481
 
@@ -70,7 +70,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_updated_at
-    customer = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")
+    customer = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")["data"]
     asc_first  = 477
     desc_first = 481
 
@@ -96,7 +96,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_id
-    customers = load_data("/api/v1/customers/find_all?id=#{customer_anibal['id']}")
+    customers = load_data("/api/v1/customers/find_all?id=#{customer_anibal['id']}")["data"]
 
     assert_equal 1, customers.count
 
@@ -106,7 +106,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_first_name
-    customers = load_data("/api/v1/customers/find_all?first_name=#{customer_anibal['first_name']}")
+    customers = load_data("/api/v1/customers/find_all?first_name=#{customer_anibal['first_name']}")["data"]
 
     assert_equal 2, customers.count
 
@@ -116,7 +116,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_last_name
-    customers = load_data("/api/v1/customers/find_all?last_name=#{customer_anibal['last_name']}")
+    customers = load_data("/api/v1/customers/find_all?last_name=#{customer_anibal['last_name']}")["data"]
 
     assert_equal 6, customers.count
 
@@ -126,7 +126,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_created_at
-    customers = load_data("/api/v1/customers/find_all?created_at=#{customer_anibal['created_at']}")
+    customers = load_data("/api/v1/customers/find_all?created_at=#{customer_anibal['created_at']}")["data"]
 
     assert_equal 4, customers.count
 
@@ -136,7 +136,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_updated_at
-    customers = load_data("/api/v1/customers/find_all?updated_at=#{customer_anibal['updated_at']}")
+    customers = load_data("/api/v1/customers/find_all?updated_at=#{customer_anibal['updated_at']}")["data"]
 
     assert_equal 4, customers.count
 

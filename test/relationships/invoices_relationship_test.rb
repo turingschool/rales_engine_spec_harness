@@ -3,7 +3,7 @@ class InvoicesApiTest < ApiTest
   def test_loads_a_collection_of_transactions_associated_with_one_invoice
     invoice_id = rand(1..4845)
 
-    data = load_data("/api/v1/invoices/#{invoice_id}/transactions")
+    data = load_data("/api/v1/invoices/#{invoice_id}/transactions")["data"]
 
     data.each do |transaction|
       assert_equal invoice_id,          transaction["invoice_id"]
@@ -15,7 +15,7 @@ class InvoicesApiTest < ApiTest
     invoice_id          = 4000
     invoice_merchant_id = 22
 
-    items = load_data("/api/v1/invoices/#{invoice_id}/items")
+    items = load_data("/api/v1/invoices/#{invoice_id}/items")["data"]
 
     assert_equal 3, items.count
     items.each do |item|
@@ -27,7 +27,7 @@ class InvoicesApiTest < ApiTest
   def test_loads_a_collection_of_invoice_items_associated_with_one_invoice
     invoice_id = rand(1..4845)
 
-    invoice_items = load_data("/api/v1/invoices/#{invoice_id}/invoice_items")
+    invoice_items = load_data("/api/v1/invoices/#{invoice_id}/invoice_items")["data"]
 
     invoice_items.each do |invoice_item|
       assert_equal invoice_id,           invoice_item["invoice_id"]
@@ -38,7 +38,7 @@ class InvoicesApiTest < ApiTest
   def test_loads_the_associated_customer
     invoice_id = 999
 
-    customer = load_data("/api/v1/invoices/#{invoice_id}/customer")
+    customer = load_data("/api/v1/invoices/#{invoice_id}/customer")["data"]
 
     assert_equal 196,              customer["id"]
     assert_equal "Eric",           customer["first_name"]
@@ -49,7 +49,7 @@ class InvoicesApiTest < ApiTest
   def test_loads_the_associated_merchant
     invoice_id = 1510
 
-    merchant = load_data("/api/v1/invoices/#{invoice_id}/merchant")
+    merchant = load_data("/api/v1/invoices/#{invoice_id}/merchant")["data"]
 
     assert_equal 83,                            merchant["id"]
     assert_equal "Gulgowski, Torphy and Lynch", merchant["name"]

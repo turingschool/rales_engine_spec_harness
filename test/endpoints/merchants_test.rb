@@ -10,13 +10,13 @@ class MerchantsApiTest < ApiTest
     }
 
     merchants.each do |id, name|
-      data = load_data("/api/v1/merchants/#{id}")
+      data = load_data("/api/v1/merchants/#{id}")["data"]
       assert_equal name, data["name"]
     end
   end
 
   def test_loads_all_merchants
-    merchants = load_data("/api/v1/merchants")
+    merchants = load_data("/api/v1/merchants")["data"]
     assert_equal 100, merchants.count
     merchants.each do |merchant|
       assert_class_equal "merchant", merchant
@@ -36,7 +36,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_id
-    merchant = load_data("/api/v1/merchants/find?id=#{merchant_find['id']}")
+    merchant = load_data("/api/v1/merchants/find?id=#{merchant_find['id']}")["data"]
 
     merchant_find.each do |attribute|
       assert_equal merchant_find[attribute], merchant[attribute]
@@ -44,7 +44,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_name
-    merchant = load_data("/api/v1/merchants/find?name=#{merchant_find['name']}")
+    merchant = load_data("/api/v1/merchants/find?name=#{merchant_find['name']}")["data"]
 
     merchant_find.each do |attribute|
       assert_equal merchant_find[attribute], merchant[attribute]
@@ -52,7 +52,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_created_at
-    merchant = load_data("/api/v1/merchants/find?created_at=#{merchant_find['created_at']}")
+    merchant = load_data("/api/v1/merchants/find?created_at=#{merchant_find['created_at']}")["data"]
 
     asc_first  = 60
     desc_first = 66
@@ -64,7 +64,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_updated_at
-    merchant = load_data("/api/v1/merchants/find?updated_at=#{merchant_find['updated_at']}")
+    merchant = load_data("/api/v1/merchants/find?updated_at=#{merchant_find['updated_at']}")["data"]
 
     asc_first  = 60
     desc_first = 66
@@ -89,7 +89,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_id
-    merchants = load_data("/api/v1/merchants/find_all?id=#{merchant_find_all['id']}")
+    merchants = load_data("/api/v1/merchants/find_all?id=#{merchant_find_all['id']}")["data"]
 
     assert_equal 1, merchants.count
 
@@ -99,7 +99,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_name
-    merchants = load_data("/api/v1/merchants/find_all?name=#{merchant_find_all['name']}")
+    merchants = load_data("/api/v1/merchants/find_all?name=#{merchant_find_all['name']}")["data"]
 
     assert_equal 1, merchants.count
 
@@ -109,7 +109,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_created_at
-    merchants = load_data("/api/v1/merchants/find_all?created_at=#{merchant_find_all['created_at']}")
+    merchants = load_data("/api/v1/merchants/find_all?created_at=#{merchant_find_all['created_at']}")["data"]
 
     assert_equal 7, merchants.count
 
@@ -119,7 +119,7 @@ class MerchantsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_updated_at
-    merchants = load_data("/api/v1/merchants/find_all?updated_at=#{merchant_find_all['updated_at']}")
+    merchants = load_data("/api/v1/merchants/find_all?updated_at=#{merchant_find_all['updated_at']}")["data"]
 
     assert_equal 7, merchants.count
 

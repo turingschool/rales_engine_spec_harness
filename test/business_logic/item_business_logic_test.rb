@@ -3,8 +3,8 @@ class ItemApiBusinessLogicTest < ApiTest
   def test_loads_the_best_day_associated_with_one_item
     item_id_one  = 1099
     item_id_two  = 2198
-    best_day_one = load_data("/api/v1/items/#{item_id_one}/best_day")
-    best_day_two = load_data("/api/v1/items/#{item_id_two}/best_day")
+    best_day_one = load_data("/api/v1/items/#{item_id_one}/best_day")["data"]
+    best_day_two = load_data("/api/v1/items/#{item_id_two}/best_day")["data"]
 
     assert_equal "2012-03-23T10:55:29.000Z", best_day_one["best_day"]
     assert_equal "2012-03-20T23:57:05.000Z", best_day_two["best_day"]
@@ -14,8 +14,8 @@ class ItemApiBusinessLogicTest < ApiTest
     group_size_one = 1
     group_size_two = 5
 
-    total_revenue_one = load_data("/api/v1/items/most_items?quantity=#{group_size_one}")
-    total_revenue_two = load_data("/api/v1/items/most_items?quantity=#{group_size_two}")
+    total_revenue_one = load_data("/api/v1/items/most_items?quantity=#{group_size_one}")["data"]
+    total_revenue_two = load_data("/api/v1/items/most_items?quantity=#{group_size_two}")["data"]
 
     assert_equal group_size_one, total_revenue_one.size
     assert_equal group_size_two, total_revenue_two.size
@@ -33,8 +33,8 @@ class ItemApiBusinessLogicTest < ApiTest
     group_size_one = 1
     group_size_two = 3
 
-    total_revenue_one = load_data("/api/v1/items/most_revenue?quantity=#{group_size_one}")
-    total_revenue_two = load_data("/api/v1/items/most_revenue?quantity=#{group_size_two}")
+    total_revenue_one = load_data("/api/v1/items/most_revenue?quantity=#{group_size_one}")["data"]
+    total_revenue_two = load_data("/api/v1/items/most_revenue?quantity=#{group_size_two}")["data"]
 
     assert_equal group_size_one, total_revenue_one.size
     assert_equal group_size_two, total_revenue_two.size

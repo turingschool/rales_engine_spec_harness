@@ -10,7 +10,7 @@ class InvoiceItemsApiTest < ApiTest
     }
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
-      data = load_data("/api/v1/invoice_items/#{id}")
+      data = load_data("/api/v1/invoice_items/#{id}")["data"]
       assert_equal item_id,    data["item_id"]
       assert_equal invoice_id, data["invoice_id"]
       assert_equal quantity,   data["quantity"]
@@ -19,7 +19,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_loads_all_invoice_items
-    invoice_items = load_data("/api/v1/invoice_items")
+    invoice_items = load_data("/api/v1/invoice_items")["data"]
     assert_equal 21687, invoice_items.count
     invoice_items.each do |invoice_item|
       assert_class_equal "invoice_item", invoice_item
@@ -42,7 +42,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_id
-    invoice_item = load_data("/api/v1/invoice_items/find?id=#{invoice_find['id']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?id=#{invoice_find['id']}")["data"]
 
     invoice_find.each do |attribute|
       assert_equal invoice_find[attribute], invoice_item[attribute]
@@ -50,7 +50,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_item_id
-    invoice_item = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?item_id=#{invoice_find['item_id']}")["data"]
     asc_first  = 5822
     desc_first = 20097
 
@@ -58,7 +58,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_invoice_id
-    invoice_item = load_data("/api/v1/invoice_items/find?invoice_id=#{invoice_find['invoice_id']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?invoice_id=#{invoice_find['invoice_id']}")["data"]
     asc_first  = 20093
     desc_first = 20098
 
@@ -66,7 +66,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_quantity
-    invoice_item = load_data("/api/v1/invoice_items/find?quantity=#{invoice_find['quantity']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?quantity=#{invoice_find['quantity']}")["data"]
     asc_first  = 21
     desc_first = 21662
 
@@ -74,7 +74,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_unit_price
-    invoice_item = load_data("/api/v1/invoice_items/find?unit_price=#{invoice_find['unit_price']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?unit_price=#{invoice_find['unit_price']}")["data"]
     asc_first  = 822
     desc_first = 20097
 
@@ -82,7 +82,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_created_at
-    invoice_item = load_data("/api/v1/invoice_items/find?created_at=#{invoice_find['created_at']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?created_at=#{invoice_find['created_at']}")["data"]
     asc_first  = 20062
     desc_first = 20147
 
@@ -90,7 +90,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_updated_at
-    invoice_item = load_data("/api/v1/invoice_items/find?updated_at=#{invoice_find['updated_at']}")
+    invoice_item = load_data("/api/v1/invoice_items/find?updated_at=#{invoice_find['updated_at']}")["data"]
     asc_first  = 20062
     desc_first = 20147
 
@@ -114,7 +114,7 @@ class InvoiceItemsApiTest < ApiTest
 
 
   def test_it_can_find_all_instances_by_id
-    invoice_items = load_data("/api/v1/invoice_items/find_all?id=#{invoice_find_all['id']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?id=#{invoice_find_all['id']}")["data"]
 
     assert_equal 1, invoice_items.count
 
@@ -124,7 +124,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_item_id
-    invoice_items = load_data("/api/v1/invoice_items/find_all?item_id=#{invoice_find_all['item_id']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?item_id=#{invoice_find_all['item_id']}")["data"]
 
     assert_equal 5, invoice_items.count
 
@@ -134,7 +134,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_invoice_id
-    invoice_items = load_data("/api/v1/invoice_items/find_all?invoice_id=#{invoice_find_all['invoice_id']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?invoice_id=#{invoice_find_all['invoice_id']}")["data"]
 
     assert_equal 6, invoice_items.count
 
@@ -144,7 +144,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_quantity
-    invoice_items = load_data("/api/v1/invoice_items/find_all?quantity=#{invoice_find_all['quantity']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?quantity=#{invoice_find_all['quantity']}")["data"]
 
     assert_equal 2164, invoice_items.count
 
@@ -154,7 +154,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_unit_price
-    invoice_items = load_data("/api/v1/invoice_items/find_all?unit_price=#{invoice_find_all['unit_price']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?unit_price=#{invoice_find_all['unit_price']}")["data"]
 
     assert_equal 9, invoice_items.count
 
@@ -164,7 +164,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_time_values
-    invoice_items = load_data("/api/v1/invoice_items/find_all?created_at=#{invoice_find_all['created_at']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?created_at=#{invoice_find_all['created_at']}")["data"]
 
     assert_equal 86, invoice_items.count
 
@@ -174,7 +174,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_time_values
-    invoice_items = load_data("/api/v1/invoice_items/find_all?updated_at=#{invoice_find_all['updated_at']}")
+    invoice_items = load_data("/api/v1/invoice_items/find_all?updated_at=#{invoice_find_all['updated_at']}")["data"]
 
     assert_equal 86, invoice_items.count
 
