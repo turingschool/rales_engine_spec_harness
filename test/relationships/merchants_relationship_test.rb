@@ -5,7 +5,7 @@ class MerchantsApiTest < ApiTest
     asc_first  = 2397
     desc_first = 2438
 
-    items = load_data("/api/v1/merchants/#{merchant_id}/items")
+    items = load_data("/api/v1/merchants/#{merchant_id}/items")["data"]
 
     assert_equal 42, items.count
     assert_equal_to_either asc_first, desc_first, items.first["id"]
@@ -22,7 +22,7 @@ class MerchantsApiTest < ApiTest
     asc_first  = 45
     desc_first = 4789
 
-    invoices = load_data("/api/v1/merchants/#{merchant_id}/invoices")
+    invoices = load_data("/api/v1/merchants/#{merchant_id}/invoices")["data"]
 
     assert_equal 49, invoices.count
     assert_equal_to_either asc_first, desc_first, invoices.first["id"]

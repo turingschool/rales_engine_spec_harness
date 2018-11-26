@@ -6,8 +6,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     merchant_id_one = 2
     merchant_id_two = 80
 
-    favorite_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/favorite_customer")
-    favorite_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/favorite_customer")
+    favorite_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/favorite_customer")["data"]
+    favorite_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/favorite_customer")["data"]
 
     assert_equal 988,                favorite_customer_one["id"]
     assert_equal_to_either 118, 458, favorite_customer_two["id"]
@@ -17,8 +17,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     merchant_id_one = 17
     merchant_id_two = 77
 
-    pending_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/customers_with_pending_invoices")
-    pending_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/customers_with_pending_invoices")
+    pending_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/customers_with_pending_invoices")["data"]
+    pending_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/customers_with_pending_invoices")["data"]
 
     assert_equal 1,   pending_customer_one.size
     assert_equal 1,   pending_customer_two.size
@@ -32,8 +32,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     merchant_id_one = 27
     merchant_id_two = 72
 
-    revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue")
-    revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue")
+    revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue")["data"]
+    revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue")["data"]
 
     assert_equal ({"revenue" => "483105.56"}),   revenue_one
     assert_equal ({"revenue" => "563785.89"}),   revenue_two
@@ -46,8 +46,8 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     date_two        = "2012-03-07"
 
 
-    revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")
-    revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue?date=#{date_two}")
+    revenue_one = load_data("/api/v1/merchants/#{merchant_id_one}/revenue?date=#{date_one}")["data"]
+    revenue_two = load_data("/api/v1/merchants/#{merchant_id_two}/revenue?date=#{date_two}")["data"]
 
     assert_equal ({"revenue" => "1518.84"}), revenue_one
     assert_equal ({"revenue" => "3004.65"}), revenue_two
@@ -55,12 +55,12 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
 end
 
 class AllMerchantsApiBusinessLogicTest < ApiTest
-  def test_loads_total_revenue_for_a_date_across_all_merchants  
+  def test_loads_total_revenue_for_a_date_across_all_merchants
     date_one = "2012-03-16"
     date_two = "2012-03-07"
 
-    total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")
-    total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")
+    total_revenue_one = load_data("/api/v1/merchants/revenue?date=#{date_one}")["data"]
+    total_revenue_two = load_data("/api/v1/merchants/revenue?date=#{date_two}")["data"]
 
     assert_equal ({"total_revenue" => "2495397.37"}), total_revenue_one
     assert_equal ({"total_revenue" => "2705630.42"}), total_revenue_two
@@ -70,8 +70,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
     group_size_one = 1
     group_size_two = 7
 
-    total_revenue_one = load_data("/api/v1/merchants/most_revenue?quantity=#{group_size_one}")
-    total_revenue_two = load_data("/api/v1/merchants/most_revenue?quantity=#{group_size_two}")
+    total_revenue_one = load_data("/api/v1/merchants/most_revenue?quantity=#{group_size_one}")["data"]
+    total_revenue_two = load_data("/api/v1/merchants/most_revenue?quantity=#{group_size_two}")["data"]
 
     assert_equal group_size_one, total_revenue_one.size
     assert_equal group_size_two, total_revenue_two.size
@@ -89,8 +89,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
     group_size_one = 1
     group_size_two = 8
 
-    total_revenue_one = load_data("/api/v1/merchants/most_items?quantity=#{group_size_one}")
-    total_revenue_two = load_data("/api/v1/merchants/most_items?quantity=#{group_size_two}")
+    total_revenue_one = load_data("/api/v1/merchants/most_items?quantity=#{group_size_one}")["data"]
+    total_revenue_two = load_data("/api/v1/merchants/most_items?quantity=#{group_size_two}")["data"]
 
     assert_equal group_size_one, total_revenue_one.size
     assert_equal group_size_two, total_revenue_two.size

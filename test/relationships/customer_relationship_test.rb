@@ -7,7 +7,7 @@ class CustomerApiRelationshipTest < ApiTest
     asc_merch_id  = 95
     desc_merch_id = 22
 
-    invoices = load_data("/api/v1/customers/#{customer_id}/invoices")
+    invoices = load_data("/api/v1/customers/#{customer_id}/invoices")["data"]
     assert_equal 6,    invoices.count
 
 
@@ -27,7 +27,7 @@ class CustomerApiRelationshipTest < ApiTest
     asc_credit  = "4136371009523904"
     desc_credit = "4410437213033941"
 
-    transactions = load_data("/api/v1/customers/#{customer_id}/transactions").flatten
+    transactions = load_data("/api/v1/customers/#{customer_id}/transactions")["data"].flatten
 
     assert_equal 8,   transactions.count
     assert_equal_to_either asc_id,     desc_id,     transactions.first["id"]

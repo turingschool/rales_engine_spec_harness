@@ -16,7 +16,7 @@ class ItemsApiTest < ApiTest
     }
 
     items.each do |id, (name, desc, unit_price, merch_id)|
-      data = load_data("/api/v1/items/#{id}")
+      data = load_data("/api/v1/items/#{id}")["data"]
       assert_equal name,       data["name"]
       assert_equal desc,       data["description"]
       assert_equal unit_price, data["unit_price"]
@@ -25,7 +25,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_loads_all_items
-    items = load_data("/api/v1/items")
+    items = load_data("/api/v1/items")["data"]
     assert_equal 2483, items.count
     items.each do |item|
       assert_class_equal "item", item
@@ -48,7 +48,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_id
-    item = load_data("/api/v1/items/find?id=#{item_find['id']}")
+    item = load_data("/api/v1/items/find?id=#{item_find['id']}")["data"]
 
     item_find.each do |attribute|
       assert_equal item_find[attribute], item[attribute]
@@ -56,7 +56,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_name
-    item = load_data("/api/v1/items/find?name=#{item_find['name']}")
+    item = load_data("/api/v1/items/find?name=#{item_find['name']}")["data"]
 
     item_find.each do |attribute|
       assert_equal item_find[attribute], item[attribute]
@@ -64,7 +64,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_description
-    item = load_data("/api/v1/items/find?description=#{item_find['description']}")
+    item = load_data("/api/v1/items/find?description=#{item_find['description']}")["data"]
 
     item_find.each do |attribute|
       assert_equal item_find[attribute], item[attribute]
@@ -72,7 +72,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_unit_price
-    item = load_data("/api/v1/items/find?unit_price=#{item_find['unit_price']}")
+    item = load_data("/api/v1/items/find?unit_price=#{item_find['unit_price']}")["data"]
 
     item_find.each do |attribute|
       assert_equal item_find[attribute], item[attribute]
@@ -80,7 +80,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_merchant_id
-    item = load_data("/api/v1/items/find?merchant_id=#{item_find['merchant_id']}")
+    item = load_data("/api/v1/items/find?merchant_id=#{item_find['merchant_id']}")["data"]
     asc_first  = 1328
     desc_first = 1370
 
@@ -88,7 +88,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_created_at
-    item = load_data("/api/v1/items/find?created_at=#{item_find['created_at']}")
+    item = load_data("/api/v1/items/find?created_at=#{item_find['created_at']}")["data"]
     asc_first  = 1360
     desc_first = 1597
 
@@ -96,7 +96,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_updated_at
-    item = load_data("/api/v1/items/find?updated_at=#{item_find['updated_at']}")
+    item = load_data("/api/v1/items/find?updated_at=#{item_find['updated_at']}")["data"]
     asc_first  = 1360
     desc_first = 1597
 
@@ -119,7 +119,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_id
-    items = load_data("/api/v1/items/find_all?id=#{item_find_all['id']}")
+    items = load_data("/api/v1/items/find_all?id=#{item_find_all['id']}")["data"]
 
     assert_equal 1, items.count
 
@@ -129,7 +129,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_name
-    items = load_data("/api/v1/items/find_all?name=#{item_find_all['name']}")
+    items = load_data("/api/v1/items/find_all?name=#{item_find_all['name']}")["data"]
 
     assert_equal 1, items.count
 
@@ -139,7 +139,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_description
-    items = load_data("/api/v1/items/find_all?description=#{item_find_all['description']}")
+    items = load_data("/api/v1/items/find_all?description=#{item_find_all['description']}")["data"]
 
     assert_equal 1, items.count
 
@@ -149,7 +149,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_unit_price
-    items = load_data("/api/v1/items/find_all?unit_price=#{item_find_all['unit_price']}")
+    items = load_data("/api/v1/items/find_all?unit_price=#{item_find_all['unit_price']}")["data"]
 
     assert_equal 1, items.count
 
@@ -159,7 +159,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_merchant_id
-    items = load_data("/api/v1/items/find_all?merchant_id=#{item_find_all['merchant_id']}")
+    items = load_data("/api/v1/items/find_all?merchant_id=#{item_find_all['merchant_id']}")["data"]
 
     assert_equal 17, items.count
 
@@ -169,7 +169,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_created_at
-    items = load_data("/api/v1/items/find_all?created_at=#{item_find_all['created_at']}")
+    items = load_data("/api/v1/items/find_all?created_at=#{item_find_all['created_at']}")["data"]
 
     assert_equal 233, items.count
 
@@ -179,7 +179,7 @@ class ItemsApiTest < ApiTest
   end
 
   def test_it_can_find_all_instances_by_updated_at
-    items = load_data("/api/v1/items/find_all?updated_at=#{item_find_all['updated_at']}")
+    items = load_data("/api/v1/items/find_all?updated_at=#{item_find_all['updated_at']}")["data"]
 
     assert_equal 233, items.count
 
