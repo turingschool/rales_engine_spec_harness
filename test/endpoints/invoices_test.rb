@@ -10,7 +10,7 @@ class InvoicesApiTest < ApiTest
     }
 
     invoices.each do |id, (cust_id, merch_id)|
-      data = load_data("/api/v1/invoices/#{id}")["data"]
+      data = load_data("/api/v1/invoices/#{id}")["data"]["attributes"]
       assert_equal cust_id,  data["customer_id"]
       assert_equal merch_id, data["merchant_id"]
     end
@@ -42,7 +42,7 @@ class InvoicesApiTest < ApiTest
     invoice = load_data("/api/v1/invoices/find?id=#{invoice_find['id']}")["data"]
 
     invoice_find.each do |attribute|
-      assert_equal invoice_find[attribute], invoice[attribute]
+      assert_equal invoice_find[attribute], invoice["attributes"][attribute]
     end
   end
 
@@ -50,7 +50,7 @@ class InvoicesApiTest < ApiTest
     invoice = load_data("/api/v1/invoices/find?customer_id=#{invoice_find['customer_id']}")["data"]
 
     invoice_find.each do |attribute|
-      assert_equal invoice_find[attribute], invoice[attribute]
+      assert_equal invoice_find[attribute], invoice["attributes"][attribute]
     end
   end
 
@@ -59,7 +59,7 @@ class InvoicesApiTest < ApiTest
     asc_first  = 51
     desc_first = 4751
 
-    assert_equal_to_either asc_first, desc_first, invoice['id']
+    assert_equal_to_either asc_first, desc_first, invoice["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_status
@@ -67,14 +67,14 @@ class InvoicesApiTest < ApiTest
     asc_first  = 1
     desc_first = 4843
 
-    assert_equal_to_either asc_first, desc_first, invoice['id']
+    assert_equal_to_either asc_first, desc_first, invoice["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_created_at
     invoice = load_data("/api/v1/invoices/find?created_at=#{invoice_find['created_at']}")["data"]
 
     invoice_find.each do |attribute|
-      assert_equal invoice_find[attribute], invoice[attribute]
+      assert_equal invoice_find[attribute], invoice["attributes"][attribute]
     end
   end
 
@@ -82,7 +82,7 @@ class InvoicesApiTest < ApiTest
     invoice = load_data("/api/v1/invoices/find?updated_at=#{invoice_find['updated_at']}")["data"]
 
     invoice_find.each do |attribute|
-      assert_equal invoice_find[attribute], invoice[attribute]
+      assert_equal invoice_find[attribute], invoice["attributes"][attribute]
     end
   end
 
@@ -107,7 +107,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 1, invoices.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+      assert_equal invoice_find_all[attribute], invoices.first["attributes"][attribute]
     end
   end
 
@@ -117,7 +117,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 4, invoices.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+      assert_equal invoice_find_all[attribute], invoices.first["attributes"][attribute]
     end
   end
 
@@ -127,7 +127,7 @@ class InvoicesApiTest < ApiTest
     desc_first = 4833
 
     assert_equal 51, invoices.count
-    assert_equal_to_either asc_first, desc_first, invoices.first['id']
+    assert_equal_to_either asc_first, desc_first, invoices.first["attributes"]['id']
   end
 
   def test_it_can_find_all_instances_by_status
@@ -136,7 +136,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 4843, invoices.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+      assert_equal invoice_find_all[attribute], invoices.first["attributes"][attribute]
     end
   end
 
@@ -146,7 +146,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 1, invoices.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+      assert_equal invoice_find_all[attribute], invoices.first["attributes"][attribute]
     end
   end
 
@@ -156,7 +156,7 @@ class InvoicesApiTest < ApiTest
     assert_equal 1, invoices.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoices.first[attribute]
+      assert_equal invoice_find_all[attribute], invoices.first["attributes"][attribute]
     end
   end
 end
