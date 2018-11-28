@@ -10,7 +10,7 @@ class CustomerApiTest < ApiTest
     }
 
     customers.each do |id, (first_name, last_name)|
-      data = load_data("/api/v1/customers/#{id}")["data"]
+      data = load_data("/api/v1/customers/#{id}")["data"]["attributes"]
       assert_equal first_name, data["first_name"]
       assert_equal last_name,  data["last_name"]
     end
@@ -38,7 +38,7 @@ class CustomerApiTest < ApiTest
   # /find?query=parameters
 
   def test_it_can_find_first_instance_by_id
-    customer = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")["data"]
+    customer = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")["data"]["attributes"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -46,7 +46,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_first_name
-    customer = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")["data"]
+    customer = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")["data"]["attributes"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -54,7 +54,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_last_name
-    customer = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")["data"]
+    customer = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")["data"]["attributes"]
 
     customer_germaine.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
@@ -62,7 +62,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_created_at
-    customer = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")["data"]
+    customer = load_data("/api/v1/customers/find?created_at=#{customer_germaine['created_at']}")["data"]["attributes"]
     asc_first  = 477
     desc_first = 481
 
@@ -70,7 +70,7 @@ class CustomerApiTest < ApiTest
   end
 
   def test_it_can_find_first_instance_by_updated_at
-    customer = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")["data"]
+    customer = load_data("/api/v1/customers/find?updated_at=#{customer_germaine['updated_at']}")["data"]["attributes"]
     asc_first  = 477
     desc_first = 481
 
@@ -101,7 +101,7 @@ class CustomerApiTest < ApiTest
     assert_equal 1, customers.count
 
     customer_anibal.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first[attribute]
+      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
 
@@ -111,7 +111,7 @@ class CustomerApiTest < ApiTest
     assert_equal 2, customers.count
 
     customer_anibal.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first[attribute]
+      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
 
@@ -121,7 +121,7 @@ class CustomerApiTest < ApiTest
     assert_equal 6, customers.count
 
     customer_anibal.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first[attribute]
+      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
 
@@ -131,7 +131,7 @@ class CustomerApiTest < ApiTest
     assert_equal 4, customers.count
 
     customer_anibal.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first[attribute]
+      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
 
@@ -141,7 +141,7 @@ class CustomerApiTest < ApiTest
     assert_equal 4, customers.count
 
     customer_anibal.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first[attribute]
+      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
 end

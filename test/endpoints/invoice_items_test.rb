@@ -10,7 +10,7 @@ class InvoiceItemsApiTest < ApiTest
     }
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
-      data = load_data("/api/v1/invoice_items/#{id}")["data"]
+      data = load_data("/api/v1/invoice_items/#{id}")["data"]["attributes"]
       assert_equal item_id,    data["item_id"]
       assert_equal invoice_id, data["invoice_id"]
       assert_equal quantity,   data["quantity"]
@@ -19,7 +19,7 @@ class InvoiceItemsApiTest < ApiTest
   end
 
   def test_loads_all_invoice_items
-    invoice_items = load_data("/api/v1/invoice_items")["data"]
+    invoice_items = load_data("/api/v1/invoice_items")["data"]["attributes"]
     assert_equal 21687, invoice_items.count
     invoice_items.each do |invoice_item|
       assert_class_equal "invoice_item", invoice_item
@@ -45,7 +45,7 @@ class InvoiceItemsApiTest < ApiTest
     invoice_item = load_data("/api/v1/invoice_items/find?id=#{invoice_find['id']}")["data"]
 
     invoice_find.each do |attribute|
-      assert_equal invoice_find[attribute], invoice_item[attribute]
+      assert_equal invoice_find[attribute], invoice_item["attributes"][attribute]
     end
   end
 
@@ -54,7 +54,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 5822
     desc_first = 20097
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_invoice_id
@@ -62,7 +62,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 20093
     desc_first = 20098
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_quantity
@@ -70,7 +70,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 21
     desc_first = 21662
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_unit_price
@@ -78,7 +78,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 822
     desc_first = 20097
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_created_at
@@ -86,7 +86,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 20062
     desc_first = 20147
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_updated_at
@@ -94,7 +94,7 @@ class InvoiceItemsApiTest < ApiTest
     asc_first  = 20062
     desc_first = 20147
 
-    assert_equal_to_either asc_first, desc_first, invoice_item['id']
+    assert_equal_to_either asc_first, desc_first, invoice_item["attributes"]['id']
   end
 
   # FINDERS
@@ -119,7 +119,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 1, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -129,7 +129,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 5, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -139,7 +139,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 6, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -149,7 +149,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 2164, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -159,7 +159,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 9, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -169,7 +169,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 86, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 
@@ -179,7 +179,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 86, invoice_items.count
 
     invoice_find_all.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first[attribute]
+      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
     end
   end
 end

@@ -17,10 +17,10 @@ class ItemsApiTest < ApiTest
 
     items.each do |id, (name, desc, unit_price, merch_id)|
       data = load_data("/api/v1/items/#{id}")["data"]
-      assert_equal name,       data["name"]
-      assert_equal desc,       data["description"]
-      assert_equal unit_price, data["unit_price"]
-      assert_equal merch_id,   data["merchant_id"]
+      assert_equal name,       data["attributes"]["name"]
+      assert_equal desc,       data["attributes"]["description"]
+      assert_equal unit_price, data["attributes"]["unit_price"]
+      assert_equal merch_id,   data["attributes"]["merchant_id"]
     end
   end
 
@@ -51,7 +51,7 @@ class ItemsApiTest < ApiTest
     item = load_data("/api/v1/items/find?id=#{item_find['id']}")["data"]
 
     item_find.each do |attribute|
-      assert_equal item_find[attribute], item[attribute]
+      assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
 
@@ -59,7 +59,7 @@ class ItemsApiTest < ApiTest
     item = load_data("/api/v1/items/find?name=#{item_find['name']}")["data"]
 
     item_find.each do |attribute|
-      assert_equal item_find[attribute], item[attribute]
+      assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
 
@@ -67,7 +67,7 @@ class ItemsApiTest < ApiTest
     item = load_data("/api/v1/items/find?description=#{item_find['description']}")["data"]
 
     item_find.each do |attribute|
-      assert_equal item_find[attribute], item[attribute]
+      assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
 
@@ -75,7 +75,7 @@ class ItemsApiTest < ApiTest
     item = load_data("/api/v1/items/find?unit_price=#{item_find['unit_price']}")["data"]
 
     item_find.each do |attribute|
-      assert_equal item_find[attribute], item[attribute]
+      assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
 
@@ -84,7 +84,7 @@ class ItemsApiTest < ApiTest
     asc_first  = 1328
     desc_first = 1370
 
-    assert_equal_to_either asc_first, desc_first, item['id']
+    assert_equal_to_either asc_first, desc_first, item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_created_at
@@ -92,7 +92,7 @@ class ItemsApiTest < ApiTest
     asc_first  = 1360
     desc_first = 1597
 
-    assert_equal_to_either asc_first, desc_first, item['id']
+    assert_equal_to_either asc_first, desc_first, item["attributes"]['id']
   end
 
   def test_it_can_find_first_instance_by_updated_at
@@ -100,7 +100,7 @@ class ItemsApiTest < ApiTest
     asc_first  = 1360
     desc_first = 1597
 
-    assert_equal_to_either asc_first, desc_first, item['id']
+    assert_equal_to_either asc_first, desc_first, item["attributes"]['id']
   end
 
   # FINDERS
@@ -124,7 +124,7 @@ class ItemsApiTest < ApiTest
     assert_equal 1, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -134,7 +134,7 @@ class ItemsApiTest < ApiTest
     assert_equal 1, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -144,7 +144,7 @@ class ItemsApiTest < ApiTest
     assert_equal 1, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -154,7 +154,7 @@ class ItemsApiTest < ApiTest
     assert_equal 1, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -164,7 +164,7 @@ class ItemsApiTest < ApiTest
     assert_equal 17, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -174,7 +174,7 @@ class ItemsApiTest < ApiTest
     assert_equal 233, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 
@@ -184,7 +184,7 @@ class ItemsApiTest < ApiTest
     assert_equal 233, items.count
 
     item_find_all.each do |attribute|
-      assert_equal item_find_all[attribute], items.first[attribute]
+      assert_equal item_find_all[attribute], items.first["attributes"][attribute]
     end
   end
 end
