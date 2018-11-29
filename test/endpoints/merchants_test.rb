@@ -19,7 +19,7 @@ class MerchantsApiTest < ApiTest
     merchants = load_data("/api/v1/merchants")["data"]
     assert_equal 100, merchants.count
     merchants.each do |merchant|
-      assert_class_equal "merchant", merchant
+      assert_class_equal "merchant", merchant["attributes"]
     end
   end
 

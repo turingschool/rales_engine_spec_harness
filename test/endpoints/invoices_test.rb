@@ -20,7 +20,7 @@ class InvoicesApiTest < ApiTest
     invoices = load_data("/api/v1/invoices")["data"]
     assert_equal 4843, invoices.count
     invoices.each do |inv|
-      assert_class_equal "invoice", inv
+      assert_class_equal "invoice", inv["attributes"]
     end
   end
 
