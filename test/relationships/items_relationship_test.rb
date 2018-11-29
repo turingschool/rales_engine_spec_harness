@@ -7,7 +7,7 @@ class ItemApiRelationshipTest < ApiTest
 
     assert_equal 8, invoice_items.count
     invoice_items.each do |invoice_item|
-      assert_equal 2015, invoice_item["item_id"]
+      assert_equal 2015, invoice_item["attributes"]["item_id"]
       assert_class_equal "invoice_item", invoice_item
     end
   end
@@ -16,8 +16,8 @@ class ItemApiRelationshipTest < ApiTest
     item_id = 676
 
     merchant = load_data("/api/v1/items/#{item_id}/merchant")["data"]
-    assert_equal 32,               merchant["id"]
-    assert_equal "Rowe and Sons",  merchant["name"]
+    assert_equal 32,               merchant["attributes"]["id"]
+    assert_equal "Rowe and Sons",  merchant["attributes"]["name"]
     assert_class_equal "merchant", merchant
   end
 end

@@ -6,10 +6,10 @@ class CustomerApiBusinessLogicTest < ApiTest
     fav_merch_one   = load_data("/api/v1/customers/#{customer_id_one}/favorite_merchant")["data"]
     fav_merch_two   = load_data("/api/v1/customers/#{customer_id_two}/favorite_merchant")["data"]
 
-    assert_equal 49,                         fav_merch_one["id"]
-    assert_equal "Marvin, Renner and Bauch", fav_merch_one["name"]
+    assert_equal 49,                         fav_merch_one["attributes"]["id"]
+    assert_equal "Marvin, Renner and Bauch", fav_merch_one["attributes"]["name"]
 
-    assert_equal 69,                 fav_merch_two["id"]
-    assert_equal "Watsica-Parisian", fav_merch_two["name"]
+    assert_equal 69,                 fav_merch_two["attributes"]["id"]
+    assert_equal "Watsica-Parisian", fav_merch_two["attributes"]["name"]
   end
 end
