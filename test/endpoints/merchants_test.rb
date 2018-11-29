@@ -11,7 +11,7 @@ class MerchantsApiTest < ApiTest
 
     merchants.each do |id, name|
       data = load_data("/api/v1/merchants/#{id}")["data"]
-      assert_equal name, data["name"]
+      assert_equal name, data["attributes"]["name"]
     end
   end
 
@@ -39,7 +39,7 @@ class MerchantsApiTest < ApiTest
     merchant = load_data("/api/v1/merchants/find?id=#{merchant_find['id']}")["data"]
 
     merchant_find.each do |attribute|
-      assert_equal merchant_find[attribute], merchant[attribute]
+      assert_equal merchant_find[attribute], merchant["attributes"][attribute]
     end
   end
 
@@ -47,7 +47,7 @@ class MerchantsApiTest < ApiTest
     merchant = load_data("/api/v1/merchants/find?name=#{merchant_find['name']}")["data"]
 
     merchant_find.each do |attribute|
-      assert_equal merchant_find[attribute], merchant[attribute]
+      assert_equal merchant_find[attribute], merchant["attributes"][attribute]
     end
   end
 
@@ -56,11 +56,11 @@ class MerchantsApiTest < ApiTest
 
     asc_first  = 60
     desc_first = 66
-    assert_equal_to_either asc_first, desc_first, merchant['id']
+    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['id']
 
     asc_first  = "Smitham LLC"
     desc_first = "Bechtelar LLC"
-    assert_equal_to_either asc_first, desc_first, merchant['name']
+    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['name']
   end
 
   def test_it_can_find_first_instance_by_updated_at
@@ -68,11 +68,11 @@ class MerchantsApiTest < ApiTest
 
     asc_first  = 60
     desc_first = 66
-    assert_equal_to_either asc_first, desc_first, merchant['id']
+    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['id']
 
     asc_first  = "Smitham LLC"
     desc_first = "Bechtelar LLC"
-    assert_equal_to_either asc_first, desc_first, merchant['name']
+    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['name']
   end
 
 
@@ -94,7 +94,7 @@ class MerchantsApiTest < ApiTest
     assert_equal 1, merchants.count
 
     merchant_find_all.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
     end
   end
 
@@ -104,7 +104,7 @@ class MerchantsApiTest < ApiTest
     assert_equal 1, merchants.count
 
     merchant_find_all.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
     end
   end
 
@@ -114,7 +114,7 @@ class MerchantsApiTest < ApiTest
     assert_equal 7, merchants.count
 
     merchant_find_all.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
     end
   end
 
@@ -124,7 +124,7 @@ class MerchantsApiTest < ApiTest
     assert_equal 7, merchants.count
 
     merchant_find_all.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
     end
   end
 end

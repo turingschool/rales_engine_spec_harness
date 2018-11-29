@@ -6,8 +6,8 @@ class ItemApiBusinessLogicTest < ApiTest
     best_day_one = load_data("/api/v1/items/#{item_id_one}/best_day")["data"]
     best_day_two = load_data("/api/v1/items/#{item_id_two}/best_day")["data"]
 
-    assert_equal "2012-03-23T10:55:29.000Z", best_day_one["best_day"]
-    assert_equal "2012-03-20T23:57:05.000Z", best_day_two["best_day"]
+    assert_equal "2012-03-23T10:55:29.000Z", best_day_one["attributes"]["best_day"]
+    assert_equal "2012-03-20T23:57:05.000Z", best_day_two["attributes"]["best_day"]
   end
 
   def test_loads_a_variable_number_of_top_items_ranked_by_total_number_sold
@@ -21,8 +21,8 @@ class ItemApiBusinessLogicTest < ApiTest
     assert_equal group_size_two, total_revenue_two.size
 
     [total_revenue_one, total_revenue_two].each do |total|
-      assert_equal 227,                total.first['id']
-      assert_equal "Item Dicta Autem", total.first['name']
+      assert_equal 227,                total.first["attributes"]['id']
+      assert_equal "Item Dicta Autem", total.first["attributes"]['name']
     end
 
     assert_response_has_attribute 104,             total_revenue_two
@@ -40,11 +40,11 @@ class ItemApiBusinessLogicTest < ApiTest
     assert_equal group_size_two, total_revenue_two.size
 
     [total_revenue_one, total_revenue_two].each do |total|
-      assert_equal 227,                total.first['id']
-      assert_equal "Item Dicta Autem", total.first['name']
+      assert_equal 227,                total.first["attributes"]['id']
+      assert_equal "Item Dicta Autem", total.first["attributes"]['name']
     end
 
-    assert_response_has_attribute 2174,              total_revenue_two
-    assert_response_has_attribute "Item Nam Magnam", total_revenue_two
+    assert_response_has_attribute 2174,              total_revenue_two["attributes"]
+    assert_response_has_attribute "Item Nam Magnam", total_revenue_two["attributes"]
   end
 end

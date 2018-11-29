@@ -6,7 +6,7 @@ class InvoicesApiTest < ApiTest
     data = load_data("/api/v1/invoices/#{invoice_id}/transactions")["data"]
 
     data.each do |transaction|
-      assert_equal invoice_id,          transaction["invoice_id"]
+      assert_equal invoice_id,          transaction["attributes"]["invoice_id"]
       assert_class_equal "transaction", transaction
     end
   end
@@ -19,7 +19,7 @@ class InvoicesApiTest < ApiTest
 
     assert_equal 3, items.count
     items.each do |item|
-      assert_equal invoice_merchant_id, item["merchant_id"]
+      assert_equal invoice_merchant_id, item["attributes"]["merchant_id"]
       assert_class_equal "item",        item
     end
   end
@@ -30,7 +30,7 @@ class InvoicesApiTest < ApiTest
     invoice_items = load_data("/api/v1/invoices/#{invoice_id}/invoice_items")["data"]
 
     invoice_items.each do |invoice_item|
-      assert_equal invoice_id,           invoice_item["invoice_id"]
+      assert_equal invoice_id,           invoice_item["attributes"]["invoice_id"]
       assert_class_equal "invoice_item", invoice_item
     end
   end
@@ -40,9 +40,9 @@ class InvoicesApiTest < ApiTest
 
     customer = load_data("/api/v1/invoices/#{invoice_id}/customer")["data"]
 
-    assert_equal 196,              customer["id"]
-    assert_equal "Eric",           customer["first_name"]
-    assert_equal "Bergnaum",       customer["last_name"]
+    assert_equal 196,              customer["attributes"]["id"]
+    assert_equal "Eric",           customer["attributes"]["first_name"]
+    assert_equal "Bergnaum",       customer["attributes"]["last_name"]
     assert_class_equal "customer", customer
   end
 
@@ -51,8 +51,8 @@ class InvoicesApiTest < ApiTest
 
     merchant = load_data("/api/v1/invoices/#{invoice_id}/merchant")["data"]
 
-    assert_equal 83,                            merchant["id"]
-    assert_equal "Gulgowski, Torphy and Lynch", merchant["name"]
+    assert_equal 83,                            merchant["attributes"]["id"]
+    assert_equal "Gulgowski, Torphy and Lynch", merchant["attributes"]["name"]
     assert_class_equal "merchant",               merchant
   end
 end

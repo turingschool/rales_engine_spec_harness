@@ -11,8 +11,8 @@ class CustomerApiRelationshipTest < ApiTest
     assert_equal 6,    invoices.count
 
 
-    assert_equal_to_either asc_id,       desc_id,       invoices.first["id"]
-    assert_equal_to_either asc_merch_id, desc_merch_id, invoices.first["merchant_id"]
+    assert_equal_to_either asc_id,       desc_id,       invoices.first["attributes"]["id"]
+    assert_equal_to_either asc_merch_id, desc_merch_id, invoices.first["attributes"]["merchant_id"]
 
     invoices.each do |invoice|
       assert_equal customer_id,     invoice["customer_id"]
@@ -30,8 +30,8 @@ class CustomerApiRelationshipTest < ApiTest
     transactions = load_data("/api/v1/customers/#{customer_id}/transactions")["data"].flatten
 
     assert_equal 8,   transactions.count
-    assert_equal_to_either asc_id,     desc_id,     transactions.first["id"]
-    assert_equal_to_either asc_credit, desc_credit, transactions.first["credit_card_number"]
+    assert_equal_to_either asc_id,     desc_id,     transactions.first["attributes"]["id"]
+    assert_equal_to_either asc_credit, desc_credit, transactions.first["attributes"]["credit_card_number"]
     assert_response_has_attribute "4136371009523904", transactions
     transactions.each do |transaction|
       assert_class_equal "transaction", transaction
