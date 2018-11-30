@@ -19,7 +19,7 @@ module CustomAssertions
   end
 
   def assert_response_has_attribute(attribute, entities)
-    result = entities.any? { |entity| entity.has_value?(attribute) }
+    result = entities.any? { |entity| entity["attributes"].has_value?(attribute) }
 
     assert result, "#{attribute} not found in collection"
   end
