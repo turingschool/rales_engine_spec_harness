@@ -96,8 +96,8 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
     assert_equal group_size_two, total_revenue_two.size
 
     [total_revenue_one, total_revenue_two].each do |total|
-      assert_equal 89,            total.first['id']
-      assert_equal "Kassulke, O'Hara and Quitzon", total.first['name']
+      assert_equal 89,            total.first["attributes"]['id']
+      assert_equal "Kassulke, O'Hara and Quitzon", total.first["attributes"]['name']
     end
 
     assert_response_has_attribute 58,           total_revenue_two["attributes"]
