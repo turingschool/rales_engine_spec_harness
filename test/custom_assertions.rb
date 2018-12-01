@@ -15,7 +15,7 @@ module CustomAssertions
       "item"         => ["id", "name", "description", "unit_price", "merchant_id"]
     }
 
-    assert_equal schema[object].sort, entity.keys.sort
+    assert_equal schema[object].sort, entity["attributes"].keys.sort
   end
 
   def assert_response_has_attribute(attribute, entities)
