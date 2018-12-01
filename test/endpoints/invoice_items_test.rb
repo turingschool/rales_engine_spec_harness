@@ -11,15 +11,15 @@ class InvoiceItemsApiTest < ApiTest
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
       data = load_data("/api/v1/invoice_items/#{id}")["data"]["attributes"]
-      assert_equal item_id,    data["item_id"]
-      assert_equal invoice_id, data["invoice_id"]
-      assert_equal quantity,   data["quantity"]
-      assert_equal unit_price, data["unit_price"]
+      assert_equal item_id,    data["attributes"]["item_id"]
+      assert_equal invoice_id, data["attributes"]["invoice_id"]
+      assert_equal quantity,   data["attributes"]["quantity"]
+      assert_equal unit_price, data["attributes"]["unit_price"]
     end
   end
 
   def test_loads_all_invoice_items
-    invoice_items = load_data("/api/v1/invoice_items")["data"]["attributes"]
+    invoice_items = load_data("/api/v1/invoice_items")["data"]
     assert_equal 21687, invoice_items.count
     invoice_items.each do |invoice_item|
       assert_class_equal "invoice_item", invoice_item
