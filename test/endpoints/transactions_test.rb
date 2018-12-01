@@ -21,7 +21,7 @@ class TransactionsApiTest < ApiTest
     transactions = load_data("/api/v1/transactions")["data"]
     assert_equal 5595, transactions.count
     transactions.each do |transaction|
-      assert_class_equal "transaction", transaction["attributes"]
+      assert_class_equal "transaction", transaction
     end
   end
 
