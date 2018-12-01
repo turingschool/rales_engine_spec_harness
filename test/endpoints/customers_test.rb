@@ -20,7 +20,7 @@ class CustomerApiTest < ApiTest
     customers = load_data("/api/v1/customers")["data"]
     assert_equal 1000, customers.count
     customers.each do |customer|
-      assert_class_equal "customer", customer["attributes"]
+      assert_class_equal "customer", customer
     end
   end
 
