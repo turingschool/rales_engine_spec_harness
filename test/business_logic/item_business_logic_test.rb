@@ -44,7 +44,7 @@ class ItemApiBusinessLogicTest < ApiTest
       assert_equal "Item Dicta Autem", total.first["attributes"]['name']
     end
 
-    assert_response_has_attribute 2174,              total_revenue_two["attributes"]
-    assert_response_has_attribute "Item Nam Magnam", total_revenue_two["attributes"]
+    assert_response_has_attribute 2174,              total_revenue_two
+    assert_response_has_attribute "Item Nam Magnam", total_revenue_two
   end
 end
