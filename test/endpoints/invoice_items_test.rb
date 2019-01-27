@@ -10,7 +10,7 @@ class InvoiceItemsApiTest < ApiTest
     }
 
     invoice_items.each do |id, (item_id, invoice_id, quantity, unit_price)|
-      data = load_data("/api/v1/invoice_items/#{id}")["data"]["attributes"]
+      data = load_data("/api/v1/invoice_items/#{id}")["data"]
       assert_equal item_id,    data["attributes"]["item_id"]
       assert_equal invoice_id, data["attributes"]["invoice_id"]
       assert_equal quantity,   data["attributes"]["quantity"]

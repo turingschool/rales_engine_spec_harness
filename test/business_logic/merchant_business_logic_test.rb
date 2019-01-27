@@ -22,10 +22,10 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
 
     assert_equal 1,   pending_customer_one.size
     assert_equal 1,   pending_customer_two.size
-    assert_response_has_attribute 197, pending_customer_one["attributes"]
-    assert_response_has_attribute 28,  pending_customer_two["attributes"]
-    assert_response_has_attribute 'Cara',  pending_customer_one["attributes"]
-    assert_response_has_attribute 'Emmerich',  pending_customer_two["attributes"]
+    assert_response_has_attribute 197, pending_customer_one
+    assert_response_has_attribute 28,  pending_customer_two
+    assert_response_has_attribute 'Cara',  pending_customer_one
+    assert_response_has_attribute 'Emmerich',  pending_customer_two
   end
 
   def test_loads_the_total_revenue_across_all_transactions_associated_with_one_merchant
@@ -100,7 +100,7 @@ class AllMerchantsApiBusinessLogicTest < ApiTest
       assert_equal "Kassulke, O'Hara and Quitzon", total.first["attributes"]['name']
     end
 
-    assert_response_has_attribute 58,           total_revenue_two["attributes"]
-    assert_response_has_attribute "Rogahn LLC", total_revenue_two["attributes"]
+    assert_response_has_attribute 58,           total_revenue_two
+    assert_response_has_attribute "Rogahn LLC", total_revenue_two
   end
 end

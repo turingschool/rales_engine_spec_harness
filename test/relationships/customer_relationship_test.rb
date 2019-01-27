@@ -15,7 +15,7 @@ class CustomerApiRelationshipTest < ApiTest
     assert_equal_to_either asc_merch_id, desc_merch_id, invoices.first["attributes"]["merchant_id"]
 
     invoices.each do |invoice|
-      assert_equal customer_id,     invoice["customer_id"]
+      assert_equal customer_id,     invoice["attributes"]["customer_id"]
       assert_class_equal "invoice", invoice
     end
   end
