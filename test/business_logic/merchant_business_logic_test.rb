@@ -20,11 +20,13 @@ class SingleMerchantApiBusinessLogicTest < ApiTest
     pending_customer_one = load_data("/api/v1/merchants/#{merchant_id_one}/customers_with_pending_invoices")["data"]
     pending_customer_two = load_data("/api/v1/merchants/#{merchant_id_two}/customers_with_pending_invoices")["data"]
 
-    assert_equal 1,   pending_customer_one.size
+    assert_equal 2,   pending_customer_one.size
     assert_equal 1,   pending_customer_two.size
     assert_response_has_attribute 197, pending_customer_one
+    assert_response_has_attribute 973, pending_customer_one
     assert_response_has_attribute 28,  pending_customer_two
     assert_response_has_attribute 'Cara',  pending_customer_one
+    assert_response_has_attribute 'Mike',  pending_customer_one
     assert_response_has_attribute 'Emmerich',  pending_customer_two
   end
 
