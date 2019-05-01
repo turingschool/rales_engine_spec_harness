@@ -125,7 +125,7 @@ class CustomerApiTest < ApiTest
     assert_equal 6, customers.count
 
     expected_attributes.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
+      assert_equal customer_anibal[attribute], customers[3]["attributes"][attribute]
     end
   end
 
@@ -135,7 +135,7 @@ class CustomerApiTest < ApiTest
     assert_equal 4, customers.count
 
     expected_attributes.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
+      assert_equal customer_anibal[attribute], customers[1]["attributes"][attribute]
     end
   end
 
@@ -145,7 +145,7 @@ class CustomerApiTest < ApiTest
     assert_equal 4, customers.count
 
     expected_attributes.each do |attribute|
-      assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
+      assert_equal customer_anibal[attribute], customers[1]["attributes"][attribute]
     end
   end
 end
