@@ -50,7 +50,7 @@ class ItemsApiTest < ApiTest
   def test_it_can_find_first_instance_by_id
     item = load_data("/api/v1/items/find?id=#{item_find['id']}")["data"]
 
-    item_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
@@ -58,7 +58,7 @@ class ItemsApiTest < ApiTest
   def test_it_can_find_first_instance_by_name
     item = load_data("/api/v1/items/find?name=#{item_find['name']}")["data"]
 
-    item_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
@@ -66,7 +66,7 @@ class ItemsApiTest < ApiTest
   def test_it_can_find_first_instance_by_description
     item = load_data("/api/v1/items/find?description=#{item_find['description']}")["data"]
 
-    item_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
@@ -74,7 +74,7 @@ class ItemsApiTest < ApiTest
   def test_it_can_find_first_instance_by_unit_price
     item = load_data("/api/v1/items/find?unit_price=#{item_find['unit_price']}")["data"]
 
-    item_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal item_find[attribute], item["attributes"][attribute]
     end
   end
