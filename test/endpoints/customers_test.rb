@@ -40,7 +40,7 @@ class CustomerApiTest < ApiTest
   def test_it_can_find_first_instance_by_id
     customer = load_data("/api/v1/customers/find?id=#{customer_germaine['id']}")["data"]["attributes"]
 
-    customer_germaine.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
     end
   end
@@ -48,7 +48,7 @@ class CustomerApiTest < ApiTest
   def test_it_can_find_first_instance_by_first_name
     customer = load_data("/api/v1/customers/find?first_name=#{customer_germaine['first_name']}")["data"]["attributes"]
 
-    customer_germaine.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
     end
   end
@@ -56,7 +56,7 @@ class CustomerApiTest < ApiTest
   def test_it_can_find_first_instance_by_last_name
     customer = load_data("/api/v1/customers/find?last_name=#{customer_germaine['last_name']}&first_name=#{customer_germaine['first_name']}")["data"]["attributes"]
 
-    customer_germaine.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_germaine[attribute], customer[attribute]
     end
   end
