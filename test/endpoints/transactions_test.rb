@@ -19,7 +19,7 @@ class TransactionsApiTest < ApiTest
 
   def test_loads_all_transactions
     transactions = load_data("/api/v1/transactions")["data"]
-    assert_equal 5594, transactions.count
+    assert_equal 5595, transactions.count
     transactions.each do |transaction|
       assert_class_equal "transaction", transaction
     end
@@ -138,11 +138,9 @@ class TransactionsApiTest < ApiTest
   def test_it_can_find_all_instances_by_result
     transactions = load_data("/api/v1/transactions/find_all?result=#{transaction_find_all['result']}")["data"]
 
-    assert_equal 946, transactions.count
+    assert_equal 947, transactions.count
 
-    expected_attributes.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions[198]["attributes"][attribute]
-    end
+    assert_equal 5593, transactions.last["attributes"]["id"]
   end
 
   def test_it_can_find_all_instances_by_created_at
