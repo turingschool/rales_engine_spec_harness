@@ -19,7 +19,7 @@ class TransactionsApiTest < ApiTest
 
   def test_loads_all_transactions
     transactions = load_data("/api/v1/transactions")["data"]
-    assert_equal 5595, transactions.count
+    assert_equal 5594, transactions.count
     transactions.each do |transaction|
       assert_class_equal "transaction", transaction
     end
@@ -39,10 +39,14 @@ class TransactionsApiTest < ApiTest
     }
   end
 
+  def expected_attributes
+    %w(id invoice_id credit_card_number result)
+  end
+
   def test_it_can_find_first_instance_by_id
     transaction = load_data("/api/v1/transactions/find?id=#{transaction_find['id']}")["data"]
 
-    transaction_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal transaction_find[attribute], transaction["attributes"][attribute]
     end
   end
@@ -50,7 +54,7 @@ class TransactionsApiTest < ApiTest
   def test_it_can_find_first_instance_by_invoice_id
     transaction = load_data("/api/v1/transactions/find?invoice_id=#{transaction_find['invoice_id']}")["data"]
 
-    transaction_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal transaction_find[attribute], transaction["attributes"][attribute]
     end
   end
@@ -58,7 +62,7 @@ class TransactionsApiTest < ApiTest
   def test_it_can_find_first_instance_by_credit_card_number
     transaction = load_data("/api/v1/transactions/find?credit_card_number=#{transaction_find['credit_card_number']}")["data"]
 
-    transaction_find.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal transaction_find[attribute], transaction["attributes"][attribute]
     end
   end
@@ -106,7 +110,7 @@ class TransactionsApiTest < ApiTest
 
     assert_equal 1, transactions.count
 
-    transaction_find_all.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
     end
   end
@@ -116,8 +120,8 @@ class TransactionsApiTest < ApiTest
 
     assert_equal 2, transactions.count
 
-    transaction_find_all.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
+    expected_attributes.each do |attribute|
+      assert_equal transaction_find_all[attribute], transactions.last["attributes"][attribute]
     end
   end
 
@@ -126,7 +130,7 @@ class TransactionsApiTest < ApiTest
 
     assert_equal 1, transactions.count
 
-    transaction_find_all.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
     end
   end
@@ -134,10 +138,10 @@ class TransactionsApiTest < ApiTest
   def test_it_can_find_all_instances_by_result
     transactions = load_data("/api/v1/transactions/find_all?result=#{transaction_find_all['result']}")["data"]
 
-    assert_equal 947, transactions.count
+    assert_equal 946, transactions.count
 
-    transaction_find_all.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
+    expected_attributes.each do |attribute|
+      assert_equal transaction_find_all[attribute], transactions[198]["attributes"][attribute]
     end
   end
 
@@ -146,8 +150,8 @@ class TransactionsApiTest < ApiTest
 
     assert_equal 29, transactions.count
 
-    transaction_find_all.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
+    expected_attributes.each do |attribute|
+      assert_equal transaction_find_all[attribute], transactions[5]["attributes"][attribute]
     end
   end
 
@@ -156,8 +160,8 @@ class TransactionsApiTest < ApiTest
 
     assert_equal 29, transactions.count
 
-    transaction_find_all.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
+    expected_attributes.each do |attribute|
+      assert_equal transaction_find_all[attribute], transactions[5]["attributes"][attribute]
     end
   end
 end
