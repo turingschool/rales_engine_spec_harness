@@ -95,12 +95,16 @@ class CustomerApiTest < ApiTest
     "#{customer_anibal["first_name"]} #{customer_anibal["last_name"]}"
   end
 
+  def expected_attributes
+    %w(id first_name last_name)
+  end
+
   def test_it_can_find_all_instances_by_id
     customers = load_data("/api/v1/customers/find_all?id=#{customer_anibal['id']}")["data"]
 
     assert_equal 1, customers.count
 
-    customer_anibal.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
@@ -110,7 +114,7 @@ class CustomerApiTest < ApiTest
 
     assert_equal 2, customers.count
 
-    customer_anibal.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
@@ -120,7 +124,7 @@ class CustomerApiTest < ApiTest
 
     assert_equal 6, customers.count
 
-    customer_anibal.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
@@ -130,7 +134,7 @@ class CustomerApiTest < ApiTest
 
     assert_equal 4, customers.count
 
-    customer_anibal.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
@@ -140,7 +144,7 @@ class CustomerApiTest < ApiTest
 
     assert_equal 4, customers.count
 
-    customer_anibal.each do |attribute|
+    expected_attributes.each do |attribute|
       assert_equal customer_anibal[attribute], customers.first["attributes"][attribute]
     end
   end
