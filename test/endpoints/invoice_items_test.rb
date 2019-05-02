@@ -168,7 +168,7 @@ class InvoiceItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_all_instances_by_time_values
+  def test_it_can_find_all_instances_by_created_time_values
     invoice_items = load_data("/api/v1/invoice_items/find_all?created_at=#{invoice_find_all['created_at']}")["data"]
 
     assert_equal 86, invoice_items.count
@@ -178,7 +178,7 @@ class InvoiceItemsApiTest < ApiTest
     end
   end
 
-  def test_it_can_find_all_instances_by_time_values
+  def test_it_can_find_all_instances_by_updated_time_values
     invoice_items = load_data("/api/v1/invoice_items/find_all?updated_at=#{invoice_find_all['updated_at']}")["data"]
 
     assert_equal 86, invoice_items.count
