@@ -174,7 +174,7 @@ class InvoiceItemsApiTest < ApiTest
     assert_equal 86, invoice_items.count
 
     expected_attributes.each do |attribute|
-      assert_equal invoice_find_all[attribute], invoice_items.first["attributes"][attribute]
+      assert_equal invoice_find_all[attribute], invoice_items[35]["attributes"][attribute]
     end
   end
 
