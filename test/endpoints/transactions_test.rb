@@ -121,7 +121,7 @@ class TransactionsApiTest < ApiTest
     assert_equal 2, transactions.count
 
     expected_attributes.each do |attribute|
-      assert_equal transaction_find_all[attribute], transactions.last["attributes"][attribute]
+      assert_equal transaction_find_all[attribute], transactions.first["attributes"][attribute]
     end
   end
 
