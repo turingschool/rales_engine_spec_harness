@@ -11,6 +11,7 @@ class ItemApiBusinessLogicTest < ApiTest
   end
 
   def test_loads_a_variable_number_of_top_items_ranked_by_total_number_sold
+    skip
     group_size_one = 1
     group_size_two = 5
 
