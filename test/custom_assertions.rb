@@ -8,7 +8,7 @@ module CustomAssertions
   def assert_class_equal(object, entity)
     schema = {
       "transaction"  => ["id", "invoice_id", "credit_card_number", "result"],
-      "merchant"     => ["id", "name"],
+      "merchant"     => ["name"],
       "customer"     => ["id", "first_name", "last_name"],
       "invoice"      => ["id", "customer_id", "merchant_id", "status"],
       "invoice_item" => ["id", "item_id", "invoice_id", "quantity", "unit_price"],

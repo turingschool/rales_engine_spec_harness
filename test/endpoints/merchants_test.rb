@@ -4,9 +4,9 @@ class MerchantsApiTest < ApiTest
   def test_loads_individual_merchants
     #merchant_id => "name"
     merchants = {
-      6  => "Williamson Group",
-      75 => "Eichmann-Turcotte",
-      43 => "Marks, Shanahan and Bauch"
+      '6'  => "Williamson Group",
+      '75' => "Eichmann-Turcotte",
+      '43' => "Marks, Shanahan and Bauch"
     }
 
     merchants.each do |id, name|
@@ -28,7 +28,7 @@ class MerchantsApiTest < ApiTest
 
   def merchant_find
     {
-      "id"         => 64,
+      "id"         => '64',
       "name"       => "Koepp, Waelchi and Donnelly",
       "created_at" => "2012-03-27T14:54:05.000Z",
       "updated_at" => "2012-03-27T14:54:05.000Z"
@@ -39,7 +39,11 @@ class MerchantsApiTest < ApiTest
     merchant = load_data("/api/v1/merchants/find?id=#{merchant_find['id']}")["data"]
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find[attribute], merchant["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find[attribute], merchant[attribute]
+      else
+        assert_equal merchant_find[attribute], merchant["attributes"][attribute]
+      end
     end
   end
 
@@ -47,16 +51,20 @@ class MerchantsApiTest < ApiTest
     merchant = load_data("/api/v1/merchants/find?name=#{merchant_find['name']}")["data"]
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find[attribute], merchant["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find[attribute], merchant[attribute]
+      else
+        assert_equal merchant_find[attribute], merchant["attributes"][attribute]
+      end
     end
   end
 
   def test_it_can_find_first_instance_by_created_at
     merchant = load_data("/api/v1/merchants/find?created_at=#{merchant_find['created_at']}")["data"]
 
-    asc_first  = 60
-    desc_first = 66
-    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['id']
+    asc_first  = '60'
+    desc_first = '66'
+    assert_equal_to_either asc_first, desc_first, merchant['id']
 
     asc_first  = "Smitham LLC"
     desc_first = "Bechtelar LLC"
@@ -66,9 +74,9 @@ class MerchantsApiTest < ApiTest
   def test_it_can_find_first_instance_by_updated_at
     merchant = load_data("/api/v1/merchants/find?updated_at=#{merchant_find['updated_at']}")["data"]
 
-    asc_first  = 60
-    desc_first = 66
-    assert_equal_to_either asc_first, desc_first, merchant["attributes"]['id']
+    asc_first  = '60'
+    desc_first = '66'
+    assert_equal_to_either asc_first, desc_first, merchant['id']
 
     asc_first  = "Smitham LLC"
     desc_first = "Bechtelar LLC"
@@ -81,7 +89,7 @@ class MerchantsApiTest < ApiTest
 
   def merchant_find_all
     {
-      "id"         => 33,
+      "id"         => '33',
       "name"       => "Quitzon and Sons",
       "created_at" => "2012-03-27T14:54:02.000Z",
       "updated_at" => "2012-03-27T14:54:02.000Z"
@@ -98,7 +106,11 @@ class MerchantsApiTest < ApiTest
     assert_equal 1, merchants.count
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      else
+        assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      end
     end
   end
 
@@ -108,17 +120,24 @@ class MerchantsApiTest < ApiTest
     assert_equal 1, merchants.count
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      else
+        assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      end
     end
   end
 
   def test_it_can_find_all_instances_by_created_at
     merchants = load_data("/api/v1/merchants/find_all?created_at=#{merchant_find_all['created_at']}")["data"]
-
     assert_equal 7, merchants.count
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      else
+        assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      end
     end
   end
 
@@ -128,7 +147,11 @@ class MerchantsApiTest < ApiTest
     assert_equal 7, merchants.count
 
     expected_attributes.each do |attribute|
-      assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      if attribute == 'id'
+        assert_equal merchant_find_all[attribute], merchants.first[attribute]
+      else
+        assert_equal merchant_find_all[attribute], merchants.first["attributes"][attribute]
+      end
     end
   end
 end
