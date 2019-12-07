@@ -30,7 +30,7 @@ class ItemApiBusinessLogicTest < ApiTest
     assert_response_has_attribute "Item Et Sequi", total_revenue_two
   end
 
-  def test_loads_a_variable_number_of_top_merchants_ranked_by_total_revenue
+  def test_loads_a_variable_number_of_top_items_ranked_by_total_revenue
     group_size_one = 1
     group_size_two = 3
 
